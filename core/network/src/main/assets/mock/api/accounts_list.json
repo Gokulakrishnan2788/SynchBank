@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "acc_001",
+      "name": "Premier Checking",
+      "balance": 48250.75,
+      "currency": "USD",
+      "accountNumber": "****4821"
+    },
+    {
+      "id": "acc_002",
+      "name": "Investment Portfolio",
+      "balance": 312400.00,
+      "currency": "USD",
+      "accountNumber": "****9034"
+    },
+    {
+      "id": "acc_003",
+      "name": "Savings Reserve",
+      "balance": 125000.00,
+      "currency": "USD",
+      "accountNumber": "****7712"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "total": 3
+  }
+}

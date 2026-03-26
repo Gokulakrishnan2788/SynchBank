@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": {
+    "userId": "usr_001",
+    "token": "mock_jwt_token_xyz",
+    "refreshToken": "mock_refresh_token_xyz",
+    "expiresAt": 9999999999000,
+    "userName": "John Architect",
+    "accountType": "INSTITUTIONAL"
+  }
+}

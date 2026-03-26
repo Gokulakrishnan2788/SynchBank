@@ -1,0 +1,7 @@
+{
+  "success": false,
+  "error": {
+    "code": "AUTH_FAILED",
+    "message": "Invalid credentials. Please try again."
+  }
+}

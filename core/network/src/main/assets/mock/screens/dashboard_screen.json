@@ -1,0 +1,102 @@
+{
+  "screenId": "dashboard",
+  "version": "1.0",
+  "metadata": {
+    "title": "Dashboard",
+    "analyticsTag": "dashboard_screen"
+  },
+  "layout": {
+    "type": "LAZY_COLUMN",
+    "padding": { "horizontal": 16, "vertical": 16 }
+  },
+  "components": [
+    {
+      "id": "greeting",
+      "type": "TEXT",
+      "visible": true,
+      "props": { "text": "Good morning,", "style": "BODY", "color": "MediumGray" }
+    },
+    {
+      "id": "user_name",
+      "type": "TEXT",
+      "visible": true,
+      "props": { "text": "Welcome back.", "style": "HEADING", "color": "NavyPrimary" }
+    },
+    {
+      "id": "spacer_1",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 24 }
+    },
+    {
+      "id": "balance_card",
+      "type": "CARD",
+      "visible": true,
+      "props": {
+        "elevation": 4,
+        "children": [
+          {
+            "id": "balance_label",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "TOTAL PORTFOLIO VALUE", "style": "LABEL", "color": "MediumGray" }
+          },
+          {
+            "id": "balance_amount",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "$485,650.75", "style": "DISPLAY", "color": "NavyPrimary" }
+          }
+        ]
+      }
+    },
+    {
+      "id": "spacer_2",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 24 }
+    },
+    {
+      "id": "quick_actions_label",
+      "type": "TEXT",
+      "visible": true,
+      "props": { "text": "Quick Actions", "style": "HEADING", "color": "NavyPrimary" }
+    },
+    {
+      "id": "spacer_3",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 12 }
+    },
+    {
+      "id": "accounts_btn",
+      "type": "BUTTON",
+      "visible": true,
+      "props": { "label": "View Accounts", "style": "SECONDARY" },
+      "action": "GO_ACCOUNTS"
+    },
+    {
+      "id": "spacer_4",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 8 }
+    },
+    {
+      "id": "transfer_btn",
+      "type": "BUTTON",
+      "visible": true,
+      "props": { "label": "Transfer Funds", "style": "PRIMARY" },
+      "action": "GO_TRANSFER"
+    }
+  ],
+  "actions": {
+    "GO_ACCOUNTS": {
+      "type": "NAVIGATE",
+      "destination": "accounts"
+    },
+    "GO_TRANSFER": {
+      "type": "NAVIGATE",
+      "destination": "transfer"
+    }
+  }
+}

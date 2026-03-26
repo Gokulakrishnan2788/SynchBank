@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "data": {
+    "token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.mock.refreshed.token",
+    "expiresAt": 9999999999000
+  }
+}

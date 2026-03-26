@@ -1,0 +1,28 @@
+{
+  "version": "1.0",
+  "flows": {
+    "auth_flow": {
+      "start": "login",
+      "transitions": {
+        "login": { "onSuccess": "dashboard", "onForgot": "forgot_password" },
+        "forgot_password": { "onSubmit": "login" }
+      }
+    },
+    "main_flow": {
+      "start": "dashboard",
+      "transitions": {
+        "dashboard": { "onAccounts": "accounts", "onTransfer": "transfer", "onProfile": "profile" },
+        "accounts": { "onSelect": "accounts/{accountId}" },
+        "transfer": { "onSuccess": "dashboard" },
+        "profile": { "onLogout": "login" }
+      }
+    }
+  },
+  "deepLinks": {
+    "architect://dashboard": "dashboard",
+    "architect://accounts/{id}": "accounts/{id}",
+    "architect://transfer": "transfer",
+    "architect://profile": "profile",
+    "architect://onboarding/inquire": "onboarding/inquire"
+  }
+}

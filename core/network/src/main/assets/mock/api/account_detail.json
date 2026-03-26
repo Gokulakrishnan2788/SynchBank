@@ -1,0 +1,10 @@
+{
+  "success": true,
+  "data": {
+    "id": "acc_001",
+    "name": "Premier Checking",
+    "balance": 48250.75,
+    "currency": "USD",
+    "accountNumber": "****4821"
+  }
+}

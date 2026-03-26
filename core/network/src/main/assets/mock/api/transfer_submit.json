@@ -1,0 +1,8 @@
+{
+  "success": true,
+  "data": {
+    "transferId": "trf_001",
+    "status": "PENDING",
+    "message": "Transfer submitted successfully"
+  }
+}

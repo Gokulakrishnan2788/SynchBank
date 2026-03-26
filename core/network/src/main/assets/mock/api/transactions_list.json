@@ -1,0 +1,30 @@
+{
+  "success": true,
+  "data": [
+    {
+      "id": "txn_001",
+      "amount": -2400.00,
+      "description": "Wire Transfer — Oakwood Capital",
+      "date": 1711497600000,
+      "category": "Transfer"
+    },
+    {
+      "id": "txn_002",
+      "amount": 15000.00,
+      "description": "Dividend Payment — ARCH Fund",
+      "date": 1711411200000,
+      "category": "Income"
+    },
+    {
+      "id": "txn_003",
+      "amount": -850.00,
+      "description": "Advisory Fee — Q1 2024",
+      "date": 1711324800000,
+      "category": "Fee"
+    }
+  ],
+  "meta": {
+    "page": 1,
+    "total": 3
+  }
+}

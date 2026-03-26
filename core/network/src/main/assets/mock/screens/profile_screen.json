@@ -1,0 +1,66 @@
+{
+  "screenId": "profile",
+  "version": "1.0",
+  "metadata": {
+    "title": "Profile",
+    "analyticsTag": "profile_screen"
+  },
+  "layout": {
+    "type": "COLUMN",
+    "padding": { "horizontal": 24, "vertical": 32 }
+  },
+  "components": [
+    {
+      "id": "profile_title",
+      "type": "TEXT",
+      "visible": true,
+      "props": { "text": "My Profile", "style": "HEADING", "color": "NavyPrimary" }
+    },
+    {
+      "id": "spacer_1",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 24 }
+    },
+    {
+      "id": "name_label",
+      "type": "TEXT",
+      "visible": true,
+      "props": { "text": "FULL NAME", "style": "LABEL", "color": "MediumGray" }
+    },
+    {
+      "id": "name_value",
+      "type": "TEXT",
+      "visible": true,
+      "props": { "text": "John Architect", "style": "BODY", "color": "NavyPrimary" }
+    },
+    {
+      "id": "divider_1",
+      "type": "DIVIDER",
+      "visible": true,
+      "props": { "thickness": 1, "color": "LightGray" }
+    },
+    {
+      "id": "spacer_2",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 16 }
+    },
+    {
+      "id": "logout_btn",
+      "type": "BUTTON",
+      "visible": true,
+      "props": { "label": "Sign Out", "style": "DESTRUCTIVE" },
+      "action": "LOGOUT"
+    }
+  ],
+  "actions": {
+    "LOGOUT": {
+      "type": "API_CALL",
+      "endpoint": "/auth/logout",
+      "method": "POST",
+      "onSuccess": { "type": "NAVIGATE", "destination": "login" },
+      "onError": { "type": "SHOW_DIALOG", "params": { "message": "Could not sign out. Please try again." } }
+    }
+  }
+}

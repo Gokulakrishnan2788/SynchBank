@@ -1,0 +1,292 @@
+{
+  "screenId": "login",
+  "version": "1.0",
+  "metadata": {
+    "title": "Secure Portal",
+    "analyticsTag": "login_screen"
+  },
+  "layout": {
+    "type": "COLUMN",
+    "padding": {
+      "horizontal": 24,
+      "vertical": 40
+    }
+  },
+  "components": [
+    {
+      "id": "brand_row",
+      "type": "ROW",
+      "visible": true,
+      "props": {
+        "spacing": 12,
+        "verticalAlignment": "CENTER"
+      },
+      "children": [
+        {
+          "id": "brand_icon",
+          "type": "IMAGE",
+          "visible": true,
+          "props": {
+            "localAsset": "ic_architect_logo_small",
+            "width": 32,
+            "height": 32,
+            "contentScale": "FIT"
+          }
+        },
+        {
+          "id": "brand_text",
+          "type": "TEXT",
+          "visible": true,
+          "props": {
+            "text": "Architect",
+            "style": "TITLE",
+            "color": "NavyPrimary"
+          }
+        }
+      ]
+    },
+    {
+      "id": "spacer_1",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 56
+      }
+    },
+    {
+      "id": "title",
+      "type": "TEXT",
+      "visible": true,
+      "props": {
+        "text": "Secure\nPortal",
+        "style": "DISPLAY",
+        "color": "NavyPrimary"
+      }
+    },
+    {
+      "id": "spacer_2",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 16
+      }
+    },
+    {
+      "id": "subtitle",
+      "type": "TEXT",
+      "visible": true,
+      "props": {
+        "text": "Access your institutional wealth management dashboard.",
+        "style": "BODY",
+        "color": "MediumGray"
+      }
+    },
+    {
+      "id": "spacer_3",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 40
+      }
+    },
+    {
+      "id": "username_label",
+      "type": "TEXT",
+      "visible": true,
+      "props": {
+        "text": "USERNAME",
+        "style": "LABEL",
+        "color": "MediumGray"
+      }
+    },
+    {
+      "id": "spacer_4",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 8
+      }
+    },
+    {
+      "id": "username_field",
+      "type": "TEXT_FIELD",
+      "visible": true,
+      "props": {
+        "hint": "Institutional ID or Email",
+        "inputType": "EMAIL",
+        "required": true,
+        "validations": [
+          {
+            "type": "EMAIL",
+            "value": "",
+            "message": "Please enter a valid email address"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spacer_5",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 24
+      }
+    },
+    {
+      "id": "password_header",
+      "type": "ROW",
+      "visible": true,
+      "props": {
+        "horizontalArrangement": "SPACE_BETWEEN",
+        "verticalAlignment": "CENTER"
+      },
+      "children": [
+        {
+          "id": "password_label",
+          "type": "TEXT",
+          "visible": true,
+          "props": {
+            "text": "PASSWORD",
+            "style": "LABEL",
+            "color": "MediumGray"
+          }
+        },
+        {
+          "id": "forgot_link",
+          "type": "LINK_TEXT",
+          "visible": true,
+          "props": {
+            "prefix": "",
+            "linkText": "FORGOT?",
+            "suffix": ""
+          },
+          "action": "FORGOT_PASSWORD"
+        }
+      ]
+    },
+    {
+      "id": "spacer_6",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 8
+      }
+    },
+    {
+      "id": "password_field",
+      "type": "TEXT_FIELD",
+      "visible": true,
+      "props": {
+        "hint": "",
+        "inputType": "PASSWORD",
+        "required": true,
+        "validations": [
+          {
+            "type": "MIN_LENGTH",
+            "value": "8",
+            "message": "Password must be at least 8 characters"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spacer_7",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 32
+      }
+    },
+    {
+      "id": "login_btn",
+      "type": "BUTTON",
+      "visible": true,
+      "props": {
+        "label": "Login",
+        "style": "PRIMARY",
+        "loading": false
+      },
+      "action": "SUBMIT_FORM"
+    },
+    {
+      "id": "spacer_8",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 24
+      }
+    },
+    {
+      "id": "auth_divider",
+      "type": "DIVIDER",
+      "visible": true,
+      "props": {
+        "label": "AUTHENTICATION"
+      }
+    },
+    {
+      "id": "spacer_9",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 20
+      }
+    },
+    {
+      "id": "biometric",
+      "type": "BIOMETRIC_ROW",
+      "visible": true,
+      "props": {
+        "options": [
+          "FINGERPRINT",
+          "FACE_ID"
+        ],
+        "label": "AUTHENTICATION"
+      }
+    },
+    {
+      "id": "spacer_10",
+      "type": "SPACER",
+      "visible": true,
+      "props": {
+        "height": 32
+      }
+    },
+    {
+      "id": "register_link",
+      "type": "LINK_TEXT",
+      "visible": true,
+      "props": {
+        "prefix": "New to the firm? ",
+        "linkText": "Inquire about an account",
+        "suffix": ""
+      },
+      "action": "INQUIRE"
+    }
+  ],
+  "actions": {
+    "SUBMIT_FORM": {
+      "type": "API_CALL",
+      "endpoint": "/auth/login",
+      "method": "POST",
+      "onSuccess": {
+        "type": "NAVIGATE",
+        "destination": "dashboard"
+      },
+      "onError": {
+        "type": "SHOW_DIALOG",
+        "params": {
+          "message": "Invalid credentials. Please try again."
+        }
+      }
+    },
+    "FORGOT_PASSWORD": {
+      "type": "NAVIGATE",
+      "destination": "forgot_password"
+    },
+    "INQUIRE": {
+      "type": "DEEP_LINK",
+      "destination": "architect://onboarding/inquire"
+    }
+  }
+}
