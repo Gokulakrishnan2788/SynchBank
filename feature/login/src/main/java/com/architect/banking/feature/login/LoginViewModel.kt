@@ -108,7 +108,14 @@ class LoginViewModel @Inject constructor(
                 setEffect(LoginEffect.NavigateToDashboard)
             }
             .onError { error ->
-                setState { copy(isLoading = false, error = error.message) }
+                if (error.code == "VALIDATION_ERROR") {
+                    // Validation failures are one-shot events — show as toast, do not persist in state.
+                    setState { copy(isLoading = false) }
+                    setEffect(LoginEffect.ShowValidationError(error.message))
+                } else {
+                    // API / network errors are persistent — shown inline in the UI via state.
+                    setState { copy(isLoading = false, error = error.message) }
+                }
             }
     }
 
@@ -121,10 +128,22 @@ class LoginViewModel @Inject constructor(
      * - `INQUIRE` → launch institutional onboarding deep link
      */
     private suspend fun handleAction(actionId: String) {
-        when (actionId) {
-            "SUBMIT_FORM" -> submitLogin()
-            "FORGOT_PASSWORD" -> setEffect(LoginEffect.NavigateToForgotPassword)
-            "INQUIRE" -> setEffect(LoginEffect.NavigateToInquire)
+        when {
+            actionId.startsWith("FIELD_CHANGE:") -> {
+                // Format: "FIELD_CHANGE:<fieldId>:<value>"
+                val parts = actionId.split(":", limit = 3)
+                if (parts.size == 3) {
+                    val fieldId = parts[1]
+                    val value = parts[2]
+                    when (fieldId) {
+                        "username_field" -> setState { copy(usernameInput = value, error = null) }
+                        "password_field" -> setState { copy(passwordInput = value, error = null) }
+                    }
+                }
+            }
+            actionId == "SUBMIT_FORM" -> submitLogin()
+            actionId == "FORGOT_PASSWORD" -> setEffect(LoginEffect.NavigateToForgotPassword)
+            actionId == "INQUIRE" -> setEffect(LoginEffect.NavigateToInquire)
         }
     }
 }

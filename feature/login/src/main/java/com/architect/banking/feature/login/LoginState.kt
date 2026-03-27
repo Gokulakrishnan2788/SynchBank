@@ -84,4 +84,13 @@ sealed class LoginEffect : UiEffect {
      * @property message Human-readable error description.
      */
     data class ShowError(val message: String) : LoginEffect()
+
+    /**
+     * Display a transient validation error as a toast/snackbar.
+     * Triggered by client-side field validation failures (blank email, short password, etc.).
+     * These are NOT stored in state — they are one-shot events.
+     *
+     * @property message Human-readable validation failure description.
+     */
+    data class ShowValidationError(val message: String) : LoginEffect()
 }

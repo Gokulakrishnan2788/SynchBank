@@ -18,6 +18,7 @@ data class LinkTextComponentProps(
     val prefix: String = "",
     val linkText: String = "",
     val suffix: String = "",
+    val linkColor: String = "NavyPrimary",
 )
 
 private const val LINK_ANNOTATION_TAG = "LINK_ACTION"
@@ -34,12 +35,15 @@ fun LinkTextComponent(props: JsonObject, onAction: (String) -> Unit) {
         Json.decodeFromJsonElement<LinkTextComponentProps>(props)
     }.getOrDefault(LinkTextComponentProps())
 
+    val resolvedLinkColor = decoded.linkColor.toArchitectColor()
+
     val annotatedString = buildAnnotatedString {
         append(decoded.prefix)
         pushStringAnnotation(tag = LINK_ANNOTATION_TAG, annotation = "link")
         withStyle(
             style = SpanStyle(
-                color = ArchitectColors.GoldAccent,
+                color = resolvedLinkColor,
+                fontWeight = androidx.compose.ui.text.font.FontWeight.SemiBold,
             ),
         ) {
             append(decoded.linkText)
@@ -49,6 +53,7 @@ fun LinkTextComponent(props: JsonObject, onAction: (String) -> Unit) {
     }
 
     ClickableText(
+
         text = annotatedString,
         style = MaterialTheme.typography.bodyMedium.copy(
             color = ArchitectColors.MediumGray,

@@ -2,6 +2,7 @@ package com.architect.banking.core.ui.components
 
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.CircularProgressIndicator
@@ -70,6 +71,7 @@ private fun PrimaryButton(
         onClick = onClick,
         modifier = modifier,
         enabled = enabled && !loading,
+        shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
             containerColor = ArchitectColors.NavyPrimary,
             contentColor = ArchitectColors.White,

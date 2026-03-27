@@ -2,6 +2,7 @@ package com.architect.banking.engine.sdui.registry
 
 import androidx.compose.runtime.Composable
 import com.architect.banking.engine.sdui.components.BiometricRowComponent
+import com.architect.banking.engine.sdui.components.HeaderBarComponent
 import com.architect.banking.engine.sdui.components.ButtonComponent
 import com.architect.banking.engine.sdui.components.CardComponent
 import com.architect.banking.engine.sdui.components.ColumnComponent
@@ -50,7 +51,7 @@ class ComponentRegistry @Inject constructor() {
                 TextComponent(component.props, actionForComponent)
 
             SduiComponentType.TEXT_FIELD ->
-                TextFieldComponent(component.props, actionForComponent)
+                TextFieldComponent(component.id, component.props, actionForComponent)
 
             SduiComponentType.BUTTON ->
                 ButtonComponent(component.props, actionForComponent)
@@ -94,6 +95,9 @@ class ComponentRegistry @Inject constructor() {
                         renderComponent(child, childAction)
                     }
                 )
+
+            SduiComponentType.HEADER_BAR ->
+                HeaderBarComponent(component.props, actionForComponent)
 
             SduiComponentType.ICON_BUTTON, SduiComponentType.UNKNOWN -> { /* not yet supported */ }
         }

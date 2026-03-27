@@ -6,51 +6,31 @@
     "analyticsTag": "login_screen"
   },
   "layout": {
-    "type": "COLUMN",
+    "type": "SCROLL",
     "padding": {
       "horizontal": 24,
       "vertical": 40
     }
   },
+
+  "header": {
+    "id": "app_header",
+    "type": "HEADER_BAR",
+    "visible": true,
+    "props": {
+      "title": "SynchBank",
+      "iconBackground": "NavyPrimary",
+      "icon": "bank"
+    }
+  },
+
   "components": [
-    {
-      "id": "brand_row",
-      "type": "ROW",
-      "visible": true,
-      "props": {
-        "spacing": 12,
-        "verticalAlignment": "CENTER"
-      },
-      "children": [
-        {
-          "id": "brand_icon",
-          "type": "IMAGE",
-          "visible": true,
-          "props": {
-            "localAsset": "ic_architect_logo_small",
-            "width": 32,
-            "height": 32,
-            "contentScale": "FIT"
-          }
-        },
-        {
-          "id": "brand_text",
-          "type": "TEXT",
-          "visible": true,
-          "props": {
-            "text": "Architect",
-            "style": "TITLE",
-            "color": "NavyPrimary"
-          }
-        }
-      ]
-    },
     {
       "id": "spacer_1",
       "type": "SPACER",
       "visible": true,
       "props": {
-        "height": 56
+        "height": 32
       }
     },
     {
@@ -114,6 +94,7 @@
       "props": {
         "hint": "Institutional ID or Email",
         "inputType": "EMAIL",
+        "variant": "FILLED",
         "required": true,
         "validations": [
           {
@@ -158,7 +139,8 @@
           "props": {
             "prefix": "",
             "linkText": "FORGOT?",
-            "suffix": ""
+            "suffix": "",
+            "linkColor": "NavyPrimary"
           },
           "action": "FORGOT_PASSWORD"
         }
@@ -179,6 +161,7 @@
       "props": {
         "hint": "",
         "inputType": "PASSWORD",
+        "variant": "FILLED",
         "required": true,
         "validations": [
           {
@@ -240,8 +223,7 @@
         "options": [
           "FINGERPRINT",
           "FACE_ID"
-        ],
-        "label": "AUTHENTICATION"
+        ]
       }
     },
     {
@@ -257,9 +239,11 @@
       "type": "LINK_TEXT",
       "visible": true,
       "props": {
-        "prefix": "New to the firm? ",
+        "prefix": "New to the firm?  ",
         "linkText": "Inquire about an account",
-        "suffix": ""
+        "suffix": "",
+        "linkColor": "NavyPrimary"
+
       },
       "action": "INQUIRE"
     }

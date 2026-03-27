@@ -13,7 +13,7 @@ import androidx.compose.ui.unit.sp
  */
 object ArchitectColors {
     // Primary palette
-    val NavyPrimary = Color(0xFF0D1B2A)
+    val NavyPrimary = Color(0xFF191C1E)
     val NavySecondary = Color(0xFF1B2E42)
     val NavyTertiary = Color(0xFF2C4A6E)
 
@@ -39,6 +39,8 @@ object ArchitectColors {
     val SurfaceDark = Color(0xFF121212)
     val CardBackground = Color(0xFFFFFFFF)
     val OverlayDark = Color(0x80000000)
+    val LoginBackground = Color(0xFFEEF2F7)
+    val FilledFieldBackground = Color(0xFFFFFFFF)
 }
 
 /**

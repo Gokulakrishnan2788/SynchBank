@@ -24,7 +24,5 @@ object SduiModule {
 
     @Provides
     @Singleton
-    fun provideScreenApiService(): ScreenApiService {
-        throw NotImplementedError("API not initialized yet")
-    }
+    fun provideScreenApiService(): ScreenApiService = object : ScreenApiService {}
 }

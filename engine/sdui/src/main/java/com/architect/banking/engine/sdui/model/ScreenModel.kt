@@ -30,6 +30,7 @@ data class ScreenModel(
     val version: String = "1.0",
     val metadata: ScreenMetadata = ScreenMetadata(),
     val layout: LayoutModel = LayoutModel(),
+    val header: ComponentModel? = null,
     val components: List<ComponentModel> = emptyList(),
     val actions: Map<String, ActionModel> = emptyMap(),
 )

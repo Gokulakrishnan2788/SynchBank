@@ -57,6 +57,7 @@ fun DashboardScreen(
         screenModel = state.screenModel,
         onAction = { actionId -> viewModel.handleIntent(DashboardIntent.HandleAction(actionId)) },
         modifier = Modifier,
+        isLoading = state.isLoading,
         error = state.error,
     )
 }

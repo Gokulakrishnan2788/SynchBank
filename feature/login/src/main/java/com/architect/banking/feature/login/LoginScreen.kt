@@ -1,6 +1,6 @@
 package com.architect.banking.feature.login
 
-import android.net.Uri
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.SnackbarHost
@@ -21,6 +21,7 @@ import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
+import com.architect.banking.core.ui.theme.ArchitectColors
 import com.architect.banking.core.ui.theme.ArchitectTheme
 import com.architect.banking.engine.navigation.NavigationAction
 import com.architect.banking.engine.navigation.NavigationEngine
@@ -57,13 +58,15 @@ fun LoginScreen(
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
-                LoginEffect.NavigateToDashboard -> NavigationEngine.navigate(
-                    navController,
-                    NavigationAction(
-                        type = NavigationType.REPLACE,
-                        destination = Routes.DASHBOARD,
-                    ),
-                )
+                LoginEffect.NavigateToDashboard -> {
+//                    NavigationEngine.navigate(
+//                        navController,
+//                        NavigationAction(
+//                            type = NavigationType.REPLACE,
+//                            destination = Routes.DASHBOARD,
+//                        ),
+//                    )
+                }
                 LoginEffect.NavigateToForgotPassword -> NavigationEngine.navigate(
                     navController,
                     NavigationAction(destination = Routes.FORGOT_PASSWORD),
@@ -88,6 +91,9 @@ fun LoginScreen(
                     }
                 }
                 is LoginEffect.ShowError -> {
+                    scope.launch { snackbarHostState.showSnackbar(effect.message) }
+                }
+                is LoginEffect.ShowValidationError -> {
                     scope.launch { snackbarHostState.showSnackbar(effect.message) }
                 }
             }
@@ -121,7 +127,7 @@ private fun LoginScreenContent(
     SDUIRenderer(
         screenModel = state.screenModel,
         onAction = { actionId -> onIntent(LoginIntent.HandleAction(actionId)) },
-        modifier = modifier.fillMaxSize(),
+        modifier = modifier.fillMaxSize().background(ArchitectColors.LoginBackground),
         error = state.error,
     )
 

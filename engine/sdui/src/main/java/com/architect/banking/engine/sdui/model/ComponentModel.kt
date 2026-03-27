@@ -20,6 +20,7 @@ enum class SduiComponentType {
     COLUMN,
     LINK_TEXT,
     BIOMETRIC_ROW,
+    HEADER_BAR,
     UNKNOWN,
 }
 

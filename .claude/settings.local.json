@@ -1,7 +1,9 @@
 {
   "permissions": {
     "allow": [
-      "Bash(./gradlew :feature:login:testDebugUnitTest)"
+      "Bash(./gradlew :feature:login:testDebugUnitTest)",
+      "Bash(find /Users/gokulakrishnanmani/AndroidStudioProjects/SynchBank -path */assets/* -name *.json -type f)",
+      "Bash(git checkout:*)"
     ]
   }
 }
