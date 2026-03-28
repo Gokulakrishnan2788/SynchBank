@@ -38,6 +38,8 @@ import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.architect.banking.core.ui.theme.ArchitectColors
 import com.architect.banking.feature.dashboard.DashboardScreen
+import com.architect.banking.feature.payments.AddBeneficiaryScreen
+import com.architect.banking.feature.payments.TransferScreen
 import com.architect.banking.feature.profile.ProfileScreen
 
 private const val TAB_HOME = "tab_home"
@@ -140,7 +142,18 @@ fun MainScreen(rootNavController: NavController) {
                 )
             }
             composable(TAB_PAYMENTS) {
-                PaymentsPlaceholder()
+                val paymentsNavController = rememberNavController()
+                NavHost(
+                    navController = paymentsNavController,
+                    startDestination = "transfer",
+                ) {
+                    composable("transfer") {
+                        TransferScreen(navController = paymentsNavController)
+                    }
+                    composable("add_beneficiary") {
+                        AddBeneficiaryScreen(navController = paymentsNavController)
+                    }
+                }
             }
             composable(TAB_ACCOUNTS) {
                 AccountsPlaceholder()
@@ -159,9 +172,3 @@ private fun AccountsPlaceholder() {
     }
 }
 
-@Composable
-private fun PaymentsPlaceholder() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Payments", color = ArchitectColors.MediumGray)
-    }
-}

@@ -52,6 +52,7 @@ dependencies {
     implementation(project(":feature:login"))
     implementation(project(":feature:dashboard"))
     implementation(project(":feature:profile"))
+    implementation(project(":feature:payments"))
 
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.lifecycle.runtime.ktx)

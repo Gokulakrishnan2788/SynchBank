@@ -13,6 +13,7 @@ import androidx.compose.foundation.layout.statusBarsPadding
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
 import androidx.compose.material.icons.outlined.AccountCircle
 import androidx.compose.material.icons.outlined.Notifications
 import androidx.compose.material.icons.outlined.Search
@@ -43,6 +44,8 @@ data class HeaderBarComponentProps(
     val showNotification: Boolean = false,
     val searchAction: String = "HEADER_SEARCH",
     val notificationAction: String = "HEADER_NOTIFICATION",
+    val showBack: Boolean = false,
+    val backAction: String = "NAVIGATE_BACK",
 )
 
 private fun String.isUrl() = startsWith("http://") || startsWith("https://")
@@ -70,24 +73,41 @@ fun HeaderBarComponent(props: JsonObject, onAction: (String) -> Unit) {
         verticalAlignment = Alignment.CenterVertically,
         horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        // ── Left: avatar + title ──────────────────────────────────────────────
+        // ── Left: back-or-avatar + title ─────────────────────────────────────
         Row(verticalAlignment = Alignment.CenterVertically) {
-            val icon = decoded.icon
-            if (!icon.isNullOrBlank() && icon.isUrl()) {
-                AsyncImage(
-                    model = icon,
-                    contentDescription = "User avatar",
+            if (decoded.showBack) {
+                Box(
                     modifier = Modifier
                         .size(36.dp)
-                        .clip(CircleShape),
-                )
+                        .clip(CircleShape)
+                        .clickable { onAction(decoded.backAction) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                        contentDescription = "Back",
+                        tint = ArchitectColors.NavyPrimary,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
             } else {
-                Icon(
-                    imageVector = Icons.Outlined.AccountCircle,
-                    contentDescription = "User avatar",
-                    tint = ArchitectColors.NavyPrimary,
-                    modifier = Modifier.size(36.dp),
-                )
+                val icon = decoded.icon
+                if (!icon.isNullOrBlank() && icon.isUrl()) {
+                    AsyncImage(
+                        model = icon,
+                        contentDescription = "User avatar",
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape),
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Outlined.AccountCircle,
+                        contentDescription = "User avatar",
+                        tint = ArchitectColors.NavyPrimary,
+                        modifier = Modifier.size(36.dp),
+                    )
+                }
             }
 
             Spacer(modifier = Modifier.width(8.dp))

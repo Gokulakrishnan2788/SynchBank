@@ -26,7 +26,7 @@ object ArchitectColors {
 
     // Neutrals
     val White = Color(0xFFFFFFFF)
-    val OffWhite = Color(0xFFF5F5F0)
+    val OffWhite = Color(0xFFEDEBE6)
     val LightGray = Color(0xFFE0E0E0)
     val MediumGray = Color(0xFF9E9E9E)
     val DarkGray = Color(0xFF424242)
@@ -44,6 +44,8 @@ object ArchitectColors {
     val OverlayDark = Color(0x80000000)
     val LoginBackground = Color(0xFFEEF2F7)
     val FilledFieldBackground = Color(0xFFFFFFFF)
+    val WarmSurface = Color(0xFFE7E8EA)
+    val FormCardBg = Color(0xFFF0F2F4)
 }
 
 /**
