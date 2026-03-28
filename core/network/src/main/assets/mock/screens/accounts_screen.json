@@ -1,0 +1,135 @@
+{
+  "screenId": "accounts",
+  "version": "1.0",
+  "metadata": { "title": "Accounts", "analyticsTag": "accounts_screen" },
+  "header": {
+    "id": "header_bar",
+    "type": "HEADER_BAR",
+    "visible": true,
+    "props": {
+      "title": "Architect",
+      "showSearch": false,
+      "showNotification": true,
+      "notificationAction": "HEADER_NOTIFICATION"
+    }
+  },
+  "layout": { "type": "SCROLL", "padding": { "horizontal": 20, "vertical": 16 } },
+  "components": [
+    {
+      "id": "balance_header", "type": "BALANCE_HEADER", "visible": true,
+      "props": {
+        "label": "TOTAL COMBINED BALANCE",
+        "amount": "$1,248,392.42",
+        "change": "+2.4% vs last month",
+        "changeColor": "Success"
+      }
+    },
+    { "id": "spacer_1", "type": "SPACER", "visible": true, "props": { "height": 24 } },
+    {
+      "id": "elite_checking_card", "type": "ACCOUNT_CARD", "visible": true,
+      "props": {
+        "theme": "WHITE",
+        "iconName": "bank",
+        "maskedNumber": "\u2022\u2022\u2022\u2022 8821",
+        "accountName": "Elite Checking",
+        "accountSubtitle": "Primary operating account",
+        "primaryLabel": "CURRENT BALANCE",
+        "primaryAmount": "$42,905.12",
+        "secondaryLabel": "AVAILABLE BALANCE",
+        "secondaryAmount": "$41,500.00",
+        "secondaryAmountColor": "NavyPrimary",
+        "buttonLabel": "Manage \u2192"
+      }
+    },
+    { "id": "spacer_2", "type": "SPACER", "visible": true, "props": { "height": 16 } },
+    {
+      "id": "hys_card", "type": "ACCOUNT_CARD", "visible": true,
+      "props": {
+        "theme": "WHITE",
+        "iconName": "savings",
+        "maskedNumber": "\u2022\u2022\u2022\u2022 4486",
+        "accountName": "High-Yield Savings",
+        "accountSubtitle": "Wealth Reserve Fund",
+        "badge": "4.85% APY",
+        "badgeColor": "Success",
+        "primaryLabel": "TOTAL BALANCE",
+        "primaryAmount": "$285,487.30",
+        "secondaryLabel": "INTEREST EARNED YTD",
+        "secondaryAmount": "+$9,214.50",
+        "secondaryAmountColor": "TealAccent",
+        "buttonLabel": "Manage \u2192"
+      }
+    },
+    { "id": "spacer_3", "type": "SPACER", "visible": true, "props": { "height": 16 } },
+    {
+      "id": "wealth_card", "type": "ACCOUNT_CARD", "visible": true,
+      "props": {
+        "theme": "DARK",
+        "iconName": "portfolio",
+        "maskedNumber": "\u2022\u2022\u2022\u2022 0012",
+        "accountName": "Wealth Management",
+        "accountSubtitle": "Managed Assets Portfolio",
+        "primaryLabel": "TOTAL PORTFOLIO VALUE",
+        "primaryAmount": "$920,000.00",
+        "equityPercent": "72%",
+        "equityAmount": "$662.4k",
+        "cashPercent": "28%",
+        "cashAmount": "$257.6k",
+        "buttonLabel": "Manage Portfolio \u2192"
+      }
+    },
+    { "id": "spacer_4", "type": "SPACER", "visible": true, "props": { "height": 24 } },
+    {
+      "id": "recent_activity", "type": "RECENT_ACTIVITY_CARD", "visible": true,
+      "props": {
+        "title": "Recent Activity",
+        "subtitle": "Real-time updates across all assets",
+        "viewAllLabel": "View Statement",
+        "viewAllAction": "VIEW_STATEMENT",
+        "items": [
+          {
+            "iconName": "shopping_bag",
+            "iconBackground": "lightgray",
+            "iconTint": "gray",
+            "title": "Apple Store Infinite Loop",
+            "subtitle": "ELITE CHECKING \u2022 PURCHASE \u2022 TODAY",
+            "amount": "-$1,299.00",
+            "amountColor": "NavyPrimary"
+          },
+          {
+            "iconName": "payments",
+            "iconBackground": "teal",
+            "iconTint": "white",
+            "title": "Dividend Payment - NVDA",
+            "subtitle": "WEALTH MANAGEMENT \u2022 EQUITY \u2022 INCOME \u2022 YESTERDAY",
+            "amount": "+$420.50",
+            "amountColor": "success"
+          },
+          {
+            "iconName": "restaurant",
+            "iconBackground": "orange",
+            "iconTint": "orange",
+            "title": "The Modern Omakase",
+            "subtitle": "ELITE CHECKING \u2022 DINING \u2022 OCT 12",
+            "amount": "-$650.00",
+            "amountColor": "NavyPrimary"
+          },
+          {
+            "iconName": "briefcase",
+            "iconBackground": "navy",
+            "iconTint": "white",
+            "title": "Bloomberg Professional",
+            "subtitle": "ELITE CHECKING \u2022 SERVICE \u2022 OCT 10",
+            "amount": "-$2,000.00",
+            "amountColor": "NavyPrimary"
+          }
+        ]
+      }
+    },
+    { "id": "spacer_end", "type": "SPACER", "visible": true, "props": { "height": 80 } }
+  ],
+  "actions": {
+    "HEADER_NOTIFICATION": { "type": "NAVIGATE", "destination": "notifications" },
+    "VIEW_STATEMENT": { "type": "NAVIGATE", "destination": "statement" }
+  }
+}

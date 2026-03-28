@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "data": [
+    { "id": "acc_001", "name": "Elite Checking", "maskedNumber": "•••• 8821", "balance": "$42,905.12", "balanceRaw": 42905.12 },
+    { "id": "acc_003", "name": "Wealth Management", "maskedNumber": "•••• 8829", "balance": "$142,850.00", "balanceRaw": 142850.00 }
+  ]
+}

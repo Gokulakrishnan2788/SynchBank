@@ -1,0 +1,4 @@
+{
+  "success": true,
+  "data": { "beneficiaryId": "ben_004", "status": "SUCCESS", "message": "Beneficiary added successfully." }
+}
