@@ -1,6 +1,7 @@
 package com.architect.banking.engine.sdui.components
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
@@ -21,6 +22,7 @@ data class RowComponentProps(
     val verticalAlignment: String = "CENTER",
     val spacing: Int = 0,
     val padding: PaddingProps? = null,
+    val fillChildrenEqually: Boolean = false,
 )
 
 @Composable
@@ -47,7 +49,13 @@ fun RowComponent(
     ) {
         children.forEach { child ->
             if (child.visible) {
-                childRenderer(child, onAction)
+                if (decoded.fillChildrenEqually) {
+                    Box(modifier = Modifier.weight(1f)) {
+                        childRenderer(child, onAction)
+                    }
+                } else {
+                    childRenderer(child, onAction)
+                }
             }
         }
     }

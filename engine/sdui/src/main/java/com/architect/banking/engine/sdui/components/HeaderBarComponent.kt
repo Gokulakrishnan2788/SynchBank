@@ -37,6 +37,7 @@ data class HeaderBarComponentProps(
     val title: String = "",
     val iconBackground: String = "NavyPrimary",
     val icon: String? = null,
+    val applyStatusBarPadding: Boolean = false,
 )
 
 private fun resolveLocalIcon(name: String): ImageVector = when (name.lowercase()) {
@@ -75,7 +76,8 @@ fun HeaderBarComponent(props: JsonObject, onAction: (String) -> Unit) {
 
     Row(
         modifier = Modifier
-            .fillMaxWidth().statusBarsPadding()
+            .fillMaxWidth()
+            .then(if (decoded.applyStatusBarPadding) Modifier.statusBarsPadding() else Modifier)
             .background(ArchitectColors.White)
             .padding(horizontal = 24.dp, vertical = 14.dp),
         verticalAlignment = Alignment.CenterVertically,

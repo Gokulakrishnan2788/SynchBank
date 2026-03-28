@@ -1,5 +1,6 @@
 package com.architect.banking.feature.dashboard
 
+import android.widget.Toast
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -10,10 +11,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.architect.banking.engine.navigation.NavigationEngine
 import com.architect.banking.engine.sdui.renderer.SDUIRenderer
 
 /**
@@ -30,13 +31,14 @@ fun DashboardScreen(
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     var dialogMessage by rememberSaveable { mutableStateOf<String?>(null) }
 
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
                 is DashboardEffect.Navigate ->
-                    NavigationEngine.navigate(navController, effect.action)
+                    Toast.makeText(context, "Not Implemented Yet", Toast.LENGTH_SHORT).show()
                 is DashboardEffect.ShowDialog ->
                     dialogMessage = effect.message
             }

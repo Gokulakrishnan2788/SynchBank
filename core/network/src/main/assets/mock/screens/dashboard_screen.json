@@ -60,7 +60,7 @@
       "id": "actions_row",
       "type": "ROW",
       "visible": true,
-      "props": { "horizontalArrangement": "START", "spacing": 12, "verticalAlignment": "CENTER" },
+      "props": { "horizontalArrangement": "START", "spacing": 12, "verticalAlignment": "CENTER", "fillChildrenEqually": true },
       "children": [
         {
           "id": "transfer_btn",
@@ -73,7 +73,7 @@
           "id": "pay_bills_btn",
           "type": "BUTTON",
           "visible": true,
-          "props": { "label": "Pay Bills", "style": "SECONDARY" },
+          "props": { "label": "Pay Bills", "style": "PRIMARY", "containerColor": "NavyTertiary" },
           "action": "GO_PAY_BILLS"
         }
       ]
@@ -241,6 +241,22 @@
             "type": "TEXT",
             "visible": true,
             "props": { "text": "Insights from your last 6 months", "style": "CAPTION", "color": "MediumGray" }
+          },
+          {
+            "id": "spacer_portfolio_chart",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 16 }
+          },
+          {
+            "id": "portfolio_line_chart",
+            "type": "LINE_CHART",
+            "visible": true,
+            "props": {
+              "dataPoints": [85000, 92000, 88000, 105000, 118000, 142850],
+              "lineColor": "Success",
+              "height": 120
+            }
           }
         ]
       }
@@ -458,6 +474,7 @@
       "visible": true,
       "props": {
         "elevation": 4,
+        "containerColor": "NavyPrimary",
         "children": [
           {
             "id": "offer_tag",
@@ -475,7 +492,7 @@
             "id": "offer_title",
             "type": "TEXT",
             "visible": true,
-            "props": { "text": "Unlock Private Wealth Advisory Services", "style": "HEADING", "color": "NavyPrimary" }
+            "props": { "text": "Unlock Private Wealth Advisory Services", "style": "HEADING", "color": "White" }
           },
           {
             "id": "spacer_offer_2",
@@ -487,7 +504,7 @@
             "id": "offer_link",
             "type": "LINK_TEXT",
             "visible": true,
-            "props": { "linkText": "Learn more \u2192", "linkColor": "NavyPrimary" },
+            "props": { "linkText": "Learn more \u2192", "linkColor": "White" },
             "action": "GO_EXCLUSIVE_OFFER"
           }
         ]

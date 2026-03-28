@@ -11,6 +11,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.architect.banking.core.ui.theme.ArchitectColors
@@ -23,12 +24,14 @@ import com.architect.banking.core.ui.theme.ArchitectTheme
  *
  * @param modifier Optional layout modifier.
  * @param elevation Shadow elevation. Defaults to [ArchitectElevation.SM].
+ * @param containerColor Card background color. Defaults to [ArchitectColors.CardBackground].
  * @param content Composable content rendered inside the card.
  */
 @Composable
 fun ArchCard(
     modifier: Modifier = Modifier,
     elevation: Float = ArchitectElevation.SM.value,
+    containerColor: Color = ArchitectColors.CardBackground,
     content: @Composable ColumnScope.() -> Unit,
 ) {
     Card(
@@ -36,7 +39,7 @@ fun ArchCard(
         shape = RoundedCornerShape(ArchitectSpacing.SM),
         elevation = CardDefaults.cardElevation(defaultElevation = elevation.dp),
         colors = CardDefaults.cardColors(
-            containerColor = ArchitectColors.CardBackground,
+            containerColor = containerColor,
         ),
     ) {
         Column(

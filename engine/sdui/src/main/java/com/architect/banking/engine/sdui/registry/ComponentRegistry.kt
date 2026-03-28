@@ -8,6 +8,7 @@ import com.architect.banking.engine.sdui.components.CardComponent
 import com.architect.banking.engine.sdui.components.ColumnComponent
 import com.architect.banking.engine.sdui.components.DividerComponent
 import com.architect.banking.engine.sdui.components.ImageComponent
+import com.architect.banking.engine.sdui.components.LineChartComponent
 import com.architect.banking.engine.sdui.components.LinkTextComponent
 import com.architect.banking.engine.sdui.components.RowComponent
 import com.architect.banking.engine.sdui.components.SpacerComponent
@@ -98,6 +99,9 @@ class ComponentRegistry @Inject constructor() {
 
             SduiComponentType.HEADER_BAR ->
                 HeaderBarComponent(component.props, actionForComponent)
+
+            SduiComponentType.LINE_CHART ->
+                LineChartComponent(component.props, actionForComponent)
 
             SduiComponentType.ICON_BUTTON, SduiComponentType.UNKNOWN -> { /* not yet supported */ }
         }
