@@ -1,24 +1,34 @@
 package com.architect.banking.navigation
 
+import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
+import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.AccountBalance
 import androidx.compose.material.icons.filled.Home
 import androidx.compose.material.icons.filled.Payment
 import androidx.compose.material.icons.filled.Person
 import androidx.compose.material3.Icon
-import androidx.compose.material3.NavigationBar
-import androidx.compose.material3.NavigationBarItem
-import androidx.compose.material3.NavigationBarItemDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import androidx.navigation.NavDestination.Companion.hierarchy
 import androidx.navigation.NavGraph.Companion.findStartDestination
@@ -43,16 +53,16 @@ private data class BottomTab(
 
 private val bottomTabs = listOf(
     BottomTab(TAB_HOME, "Home", Icons.Default.Home),
-    BottomTab(TAB_ACCOUNTS, "Accounts", Icons.Default.AccountBalance),
     BottomTab(TAB_PAYMENTS, "Payments", Icons.Default.Payment),
+    BottomTab(TAB_ACCOUNTS, "Accounts", Icons.Default.AccountBalance),
     BottomTab(TAB_PROFILE, "Profile", Icons.Default.Person),
 )
 
 /**
  * Main shell screen that hosts bottom navigation.
  *
- * Owns a nested [NavHost] for tab content. Receives [rootNavController] so
- * individual tab screens can trigger global navigation (e.g. deep links).
+ * Uses a fully custom bottom nav bar so the selected tab shows a rounded-rect
+ * pill behind both the icon AND the label — matching the design spec.
  *
  * @param rootNavController The application-level nav controller (from [ArchitectNavHost]).
  */
@@ -64,34 +74,48 @@ fun MainScreen(rootNavController: NavController) {
 
     Scaffold(
         bottomBar = {
-            NavigationBar(
-                containerColor = ArchitectColors.White,
+            Row(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .background(ArchitectColors.White)
+                    .navigationBarsPadding()
+                    .padding(horizontal = 12.dp, vertical = 8.dp),
+                horizontalArrangement = Arrangement.Start,
+                verticalAlignment = Alignment.CenterVertically,
             ) {
                 bottomTabs.forEach { tab ->
                     val selected = currentDestination?.hierarchy?.any { it.route == tab.route } == true
-                    NavigationBarItem(
-                        selected = selected,
-                        onClick = {
-                            bottomNavController.navigate(tab.route) {
-                                popUpTo(bottomNavController.graph.findStartDestination().id) {
-                                    saveState = true
+
+                    Column(
+                        modifier = Modifier
+                            .weight(1f)
+                            .clip(RoundedCornerShape(14.dp))
+                            .background(if (selected) ArchitectColors.NavyPrimary else Color.Transparent)
+                            .clickable {
+                                bottomNavController.navigate(tab.route) {
+                                    popUpTo(bottomNavController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
                             }
-                        },
-                        icon = {
-                            Icon(imageVector = tab.icon, contentDescription = tab.label)
-                        },
-                        label = { Text(text = tab.label) },
-                        colors = NavigationBarItemDefaults.colors(
-                            selectedIconColor = ArchitectColors.White,
-                            selectedTextColor = ArchitectColors.NavyPrimary,
-                            unselectedIconColor = ArchitectColors.MediumGray,
-                            unselectedTextColor = ArchitectColors.MediumGray,
-                            indicatorColor = ArchitectColors.NavyPrimary,
-                        ),
-                    )
+                            .padding(horizontal = 8.dp, vertical = 8.dp),
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(2.dp),
+                    ) {
+                        Icon(
+                            imageVector = tab.icon,
+                            contentDescription = tab.label,
+                            tint = if (selected) ArchitectColors.White else ArchitectColors.MediumGray,
+                        )
+                        Text(
+                            text = tab.label,
+                            fontSize = 11.sp,
+                            fontWeight = if (selected) FontWeight.SemiBold else FontWeight.Normal,
+                            color = if (selected) ArchitectColors.White else ArchitectColors.MediumGray,
+                        )
+                    }
                 }
             }
         },
@@ -115,11 +139,11 @@ fun MainScreen(rootNavController: NavController) {
                     },
                 )
             }
-            composable(TAB_ACCOUNTS) {
-                AccountsPlaceholder()
-            }
             composable(TAB_PAYMENTS) {
                 PaymentsPlaceholder()
+            }
+            composable(TAB_ACCOUNTS) {
+                AccountsPlaceholder()
             }
             composable(TAB_PROFILE) {
                 ProfileScreen(navController = rootNavController)

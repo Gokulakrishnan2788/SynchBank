@@ -12,7 +12,8 @@
       "Bash(git add:*)",
       "Bash(git commit:*)",
       "Bash(python3 -m json.tool /Users/gokulakrishnanmani/AndroidStudioProjects/SynchBank/core/network/src/main/assets/mock/screens/dashboard_screen.json)",
-      "Bash(./gradlew :app:compileDebugKotlin --no-daemon)"
+      "Bash(./gradlew :app:compileDebugKotlin --no-daemon)",
+      "Bash(git push:*)"
     ]
   }
 }
