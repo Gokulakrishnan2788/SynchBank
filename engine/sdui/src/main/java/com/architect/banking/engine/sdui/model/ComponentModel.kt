@@ -22,6 +22,8 @@ enum class SduiComponentType {
     BIOMETRIC_ROW,
     HEADER_BAR,
     LINE_CHART,
+    ICON,
+    ACTIVITY_ITEM,
     UNKNOWN,
 }
 

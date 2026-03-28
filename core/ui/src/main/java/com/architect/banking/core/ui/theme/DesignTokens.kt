@@ -13,13 +13,16 @@ import androidx.compose.ui.unit.sp
  */
 object ArchitectColors {
     // Primary palette
-    val NavyPrimary = Color(0xFF191C1E)
+    val NavyPrimary = Color(0xFF051743)
     val NavySecondary = Color(0xFF1B2E42)
     val NavyTertiary = Color(0xFF2C4A6E)
 
     // Accent
     val GoldAccent = Color(0xFFC9A84C)
     val GoldLight = Color(0xFFE8C97A)
+    val TealAccent = Color(0xFF00897B)
+    val TealLight = Color(0xFFB2DFDB)
+    val TealDark = Color(0xFF004D40)
 
     // Neutrals
     val White = Color(0xFFFFFFFF)

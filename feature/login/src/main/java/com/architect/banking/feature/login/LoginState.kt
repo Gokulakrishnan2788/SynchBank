@@ -50,6 +50,9 @@ sealed class LoginIntent : UiIntent {
     /** User selected a biometric method from the BIOMETRIC_ROW component. */
     data class BiometricSelected(val type: BiometricType) : LoginIntent()
 
+    /** Biometric authentication succeeded — navigate directly to dashboard, skip credential validation. */
+    object BiometricLoginSuccess : LoginIntent()
+
     /** SDUI component dispatched action with [actionId]. */
     data class HandleAction(val actionId: String) : LoginIntent()
 

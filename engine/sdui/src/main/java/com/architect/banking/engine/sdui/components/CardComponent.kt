@@ -33,7 +33,7 @@ fun CardComponent(
     childRenderer: @Composable (ComponentModel, (String) -> Unit) -> Unit,
 ) {
     val decoded = runCatching {
-        Json.decodeFromJsonElement<CardComponentProps>(props)
+        Json { ignoreUnknownKeys = true }.decodeFromJsonElement<CardComponentProps>(props)
     }.getOrDefault(CardComponentProps())
 
     ArchCard(elevation = decoded.elevation, containerColor = decoded.containerColor.toCardColor()) {

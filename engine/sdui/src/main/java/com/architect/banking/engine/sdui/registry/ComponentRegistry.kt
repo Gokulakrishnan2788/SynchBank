@@ -1,6 +1,7 @@
 package com.architect.banking.engine.sdui.registry
 
 import androidx.compose.runtime.Composable
+import com.architect.banking.engine.sdui.components.ActivityItemComponent
 import com.architect.banking.engine.sdui.components.BiometricRowComponent
 import com.architect.banking.engine.sdui.components.HeaderBarComponent
 import com.architect.banking.engine.sdui.components.ButtonComponent
@@ -8,6 +9,7 @@ import com.architect.banking.engine.sdui.components.CardComponent
 import com.architect.banking.engine.sdui.components.ColumnComponent
 import com.architect.banking.engine.sdui.components.DividerComponent
 import com.architect.banking.engine.sdui.components.ImageComponent
+import com.architect.banking.engine.sdui.components.IconComponent
 import com.architect.banking.engine.sdui.components.LineChartComponent
 import com.architect.banking.engine.sdui.components.LinkTextComponent
 import com.architect.banking.engine.sdui.components.RowComponent
@@ -102,6 +104,12 @@ class ComponentRegistry @Inject constructor() {
 
             SduiComponentType.LINE_CHART ->
                 LineChartComponent(component.props, actionForComponent)
+
+            SduiComponentType.ICON ->
+                IconComponent(component.props, actionForComponent)
+
+            SduiComponentType.ACTIVITY_ITEM ->
+                ActivityItemComponent(component.props, actionForComponent)
 
             SduiComponentType.ICON_BUTTON, SduiComponentType.UNKNOWN -> { /* not yet supported */ }
         }

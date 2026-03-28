@@ -45,6 +45,7 @@ class LoginViewModel @Inject constructor(
             is LoginIntent.Submit -> submitLogin()
             is LoginIntent.ForgotPassword -> setEffect(LoginEffect.NavigateToForgotPassword)
             is LoginIntent.BiometricSelected -> setEffect(LoginEffect.ShowBiometricPrompt(intent.type))
+            is LoginIntent.BiometricLoginSuccess -> setEffect(LoginEffect.NavigateToDashboard)
             is LoginIntent.HandleAction -> handleAction(intent.actionId)
             is LoginIntent.ClearError -> setState { copy(error = null) }
         }
@@ -124,6 +125,8 @@ class LoginViewModel @Inject constructor(
             actionId == "SUBMIT_FORM" -> submitLogin()
             actionId == "FORGOT_PASSWORD" -> setEffect(LoginEffect.NavigateToForgotPassword)
             actionId == "INQUIRE" -> setEffect(LoginEffect.NavigateToInquire)
+            actionId == "BIOMETRIC_FINGERPRINT" -> setEffect(LoginEffect.ShowBiometricPrompt(BiometricType.FINGERPRINT))
+            actionId == "BIOMETRIC_FACE_ID" -> setEffect(LoginEffect.ShowBiometricPrompt(BiometricType.FACE_ID))
         }
     }
 }

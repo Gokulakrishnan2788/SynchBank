@@ -59,5 +59,6 @@ internal fun String.toArchitectColor(): Color = when (this) {
     "DarkGray" -> ArchitectColors.DarkGray
     "Success" -> ArchitectColors.Success
     "Error" -> ArchitectColors.Error
+    "Info" -> ArchitectColors.Info
     else -> Color.Unspecified
 }

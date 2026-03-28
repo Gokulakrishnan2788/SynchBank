@@ -10,6 +10,7 @@ room = "2.6.1"
 coroutines = "1.8.1"
 navigationCompose = "2.8.4"
 coil = "2.7.0"
+biometric = "1.1.0"
 kotlinxSerialization = "1.7.3"
 lifecycleViewmodelCompose = "2.8.7"
 lifecycleRuntimeCompose = "2.8.7"
@@ -71,6 +72,9 @@ kotlinx-coroutines-core = { group = "org.jetbrains.kotlinx", name = "kotlinx-cor
 
 # Coil
 coil-compose = { group = "io.coil-kt", name = "coil-compose", version.ref = "coil" }
+
+# Biometric
+androidx-biometric = { group = "androidx.biometric", name = "biometric", version.ref = "biometric" }
 
 # Testing
 junit = { group = "junit", name = "junit", version.ref = "junit" }

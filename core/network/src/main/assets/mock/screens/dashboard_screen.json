@@ -12,7 +12,10 @@
     "props": {
       "title": "Architect",
       "iconBackground": "NavyPrimary",
-      "icon": "bank"
+      "showSearch": true,
+      "showNotification": true,
+      "searchAction": "HEADER_SEARCH",
+      "notificationAction": "HEADER_NOTIFICATION"
     }
   },
   "layout": {
@@ -100,7 +103,7 @@
           "id": "manage_accounts_link",
           "type": "LINK_TEXT",
           "visible": true,
-          "props": { "linkText": "Manage Accounts", "linkColor": "NavyPrimary" },
+          "props": { "linkText": "Manage Accounts", "linkColor": "Info" },
           "action": "GO_MANAGE_ACCOUNTS"
         }
       ]
@@ -119,10 +122,24 @@
         "elevation": 2,
         "children": [
           {
-            "id": "elite_label",
-            "type": "TEXT",
+            "id": "elite_top_row",
+            "type": "ROW",
             "visible": true,
-            "props": { "text": "ELITE CHECKING", "style": "LABEL", "color": "MediumGray" }
+            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "TOP" },
+            "children": [
+              {
+                "id": "elite_label",
+                "type": "TEXT",
+                "visible": true,
+                "props": { "text": "ELITE CHECKING", "style": "LABEL", "color": "MediumGray" }
+              },
+              {
+                "id": "elite_icon",
+                "type": "ICON",
+                "visible": true,
+                "props": { "name": "wallet", "size": 40, "tint": "LightGray" }
+              }
+            ]
           },
           {
             "id": "spacer_elite_1",
@@ -165,10 +182,24 @@
         "elevation": 2,
         "children": [
           {
-            "id": "hys_label",
-            "type": "TEXT",
+            "id": "hys_top_row",
+            "type": "ROW",
             "visible": true,
-            "props": { "text": "HIGH-YIELD SAVINGS", "style": "LABEL", "color": "MediumGray" }
+            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "TOP" },
+            "children": [
+              {
+                "id": "hys_label",
+                "type": "TEXT",
+                "visible": true,
+                "props": { "text": "HIGH-YIELD SAVINGS", "style": "LABEL", "color": "MediumGray" }
+              },
+              {
+                "id": "hys_icon",
+                "type": "ICON",
+                "visible": true,
+                "props": { "name": "savings", "size": 40, "tint": "LightGray" }
+              }
+            ]
           },
           {
             "id": "spacer_hys_1",
@@ -254,7 +285,7 @@
             "visible": true,
             "props": {
               "dataPoints": [85000, 92000, 88000, 105000, 118000, 142850],
-              "lineColor": "Success",
+              "lineColor": "TealAccent",
               "height": 120
             }
           }
@@ -302,162 +333,60 @@
         "elevation": 2,
         "children": [
           {
-            "id": "activity_apple_row",
-            "type": "ROW",
+            "id": "activity_apple",
+            "type": "ACTIVITY_ITEM",
             "visible": true,
-            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
-            "children": [
-              {
-                "id": "apple_name",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "Apple Store", "style": "BODY", "color": "NavyPrimary" }
-              },
-              {
-                "id": "apple_amount",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "-$1,299.00", "style": "BODY", "color": "NavyPrimary" }
-              }
-            ]
+            "props": {
+              "iconName": "shopping_bag",
+              "iconBackground": "lightgray",
+              "iconTint": "gray",
+              "title": "Apple Store",
+              "subtitle": "Electronics  \u2022  Today",
+              "amount": "-$1,299.00",
+              "amountColor": "NavyPrimary"
+            }
           },
           {
-            "id": "apple_sub",
-            "type": "TEXT",
+            "id": "activity_salary",
+            "type": "ACTIVITY_ITEM",
             "visible": true,
-            "props": { "text": "Electronics  \u2022  Today", "style": "CAPTION", "color": "MediumGray" }
+            "props": {
+              "iconName": "payments",
+              "iconBackground": "success",
+              "iconTint": "white",
+              "title": "Salary Deposit",
+              "subtitle": "Income  \u2022  Oct 15",
+              "amount": "+$8,450.00",
+              "amountColor": "success"
+            }
           },
           {
-            "id": "spacer_div_1",
-            "type": "SPACER",
+            "id": "activity_oak",
+            "type": "ACTIVITY_ITEM",
             "visible": true,
-            "props": { "height": 12 }
+            "props": {
+              "iconName": "restaurant",
+              "iconBackground": "orange",
+              "iconTint": "orange",
+              "title": "The Oak Bistro",
+              "subtitle": "Dining  \u2022  Oct 14",
+              "amount": "-$84.20",
+              "amountColor": "NavyPrimary"
+            }
           },
           {
-            "id": "divider_1",
-            "type": "DIVIDER",
+            "id": "activity_tesla",
+            "type": "ACTIVITY_ITEM",
             "visible": true,
-            "props": {}
-          },
-          {
-            "id": "spacer_div_2",
-            "type": "SPACER",
-            "visible": true,
-            "props": { "height": 12 }
-          },
-          {
-            "id": "activity_salary_row",
-            "type": "ROW",
-            "visible": true,
-            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
-            "children": [
-              {
-                "id": "salary_name",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "Salary Deposit", "style": "BODY", "color": "NavyPrimary" }
-              },
-              {
-                "id": "salary_amount",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "+$8,450.00", "style": "BODY", "color": "Success" }
-              }
-            ]
-          },
-          {
-            "id": "salary_sub",
-            "type": "TEXT",
-            "visible": true,
-            "props": { "text": "Income  \u2022  Oct 15", "style": "CAPTION", "color": "MediumGray" }
-          },
-          {
-            "id": "spacer_div_3",
-            "type": "SPACER",
-            "visible": true,
-            "props": { "height": 12 }
-          },
-          {
-            "id": "divider_2",
-            "type": "DIVIDER",
-            "visible": true,
-            "props": {}
-          },
-          {
-            "id": "spacer_div_4",
-            "type": "SPACER",
-            "visible": true,
-            "props": { "height": 12 }
-          },
-          {
-            "id": "activity_oak_row",
-            "type": "ROW",
-            "visible": true,
-            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
-            "children": [
-              {
-                "id": "oak_name",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "The Oak Bistro", "style": "BODY", "color": "NavyPrimary" }
-              },
-              {
-                "id": "oak_amount",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "-$84.20", "style": "BODY", "color": "NavyPrimary" }
-              }
-            ]
-          },
-          {
-            "id": "oak_sub",
-            "type": "TEXT",
-            "visible": true,
-            "props": { "text": "Dining  \u2022  Oct 14", "style": "CAPTION", "color": "MediumGray" }
-          },
-          {
-            "id": "spacer_div_5",
-            "type": "SPACER",
-            "visible": true,
-            "props": { "height": 12 }
-          },
-          {
-            "id": "divider_3",
-            "type": "DIVIDER",
-            "visible": true,
-            "props": {}
-          },
-          {
-            "id": "spacer_div_6",
-            "type": "SPACER",
-            "visible": true,
-            "props": { "height": 12 }
-          },
-          {
-            "id": "activity_tesla_row",
-            "type": "ROW",
-            "visible": true,
-            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
-            "children": [
-              {
-                "id": "tesla_name",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "Tesla Supercharger", "style": "BODY", "color": "NavyPrimary" }
-              },
-              {
-                "id": "tesla_amount",
-                "type": "TEXT",
-                "visible": true,
-                "props": { "text": "-$22.50", "style": "BODY", "color": "NavyPrimary" }
-              }
-            ]
-          },
-          {
-            "id": "tesla_sub",
-            "type": "TEXT",
-            "visible": true,
-            "props": { "text": "Transport  \u2022  Oct 12", "style": "CAPTION", "color": "MediumGray" }
+            "props": {
+              "iconName": "car",
+              "iconBackground": "blue",
+              "iconTint": "blue",
+              "title": "Tesla Supercharger",
+              "subtitle": "Transport  \u2022  Oct 12",
+              "amount": "-$22.50",
+              "amountColor": "NavyPrimary"
+            }
           }
         ]
       }
@@ -518,6 +447,14 @@
     }
   ],
   "actions": {
+    "HEADER_SEARCH": {
+      "type": "NAVIGATE",
+      "destination": "search"
+    },
+    "HEADER_NOTIFICATION": {
+      "type": "NAVIGATE",
+      "destination": "notifications"
+    },
     "GO_TRANSFER": {
       "type": "NAVIGATE",
       "destination": "transfer"

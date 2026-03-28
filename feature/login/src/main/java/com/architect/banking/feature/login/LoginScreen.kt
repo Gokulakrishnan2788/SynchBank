@@ -1,7 +1,15 @@
 package com.architect.banking.feature.login
 
+import android.content.ActivityNotFoundException
+import android.content.Intent
+import android.net.Uri
+import androidx.biometric.BiometricManager
+import androidx.biometric.BiometricManager.Authenticators
+import androidx.biometric.BiometricPrompt
 import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.navigationBarsPadding
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.SnackbarHost
 import androidx.compose.material3.SnackbarHostState
@@ -15,8 +23,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.tooling.preview.Preview
+import androidx.core.content.ContextCompat
+import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
@@ -51,6 +63,7 @@ fun LoginScreen(
     viewModel: LoginViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     var errorDialogMessage by rememberSaveable { mutableStateOf<String?>(null) }
@@ -70,23 +83,105 @@ fun LoginScreen(
                     NavigationAction(destination = Routes.FORGOT_PASSWORD),
                 )
                 LoginEffect.NavigateToInquire -> {
-                    // Deep link to external institutional onboarding flow.
-                    NavigationEngine.navigate(
-                        navController,
-                        NavigationAction(
-                            type = NavigationType.DEEP_LINK,
-                            deepLink = "architect://onboarding/inquire",
-                        ),
-                    )
+                    try {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com")).apply {
+                            addFlags(Intent.FLAG_ACTIVITY_NEW_TASK)
+                        }
+                        context.startActivity(intent)
+                    } catch (e: ActivityNotFoundException) {
+                        scope.launch {
+                            snackbarHostState.showSnackbar("No browser found to open the link")
+                        }
+                    }
                 }
                 is LoginEffect.ShowBiometricPrompt -> {
-                    // TODO: Wire androidx.biometric BiometricPrompt with LocalContext activity.
-                    // For now surfaces the type as a snackbar hint.
-                    scope.launch {
-                        snackbarHostState.showSnackbar(
-                            "Biometric: ${effect.type.name}"
-                        )
+                    val activity = context as? FragmentActivity
+                    if (activity == null) {
+                        scope.launch { snackbarHostState.showSnackbar("Biometric not supported") }
+                        return@collect
                     }
+
+                    val biometricManager = BiometricManager.from(context)
+                    val fingerprintAvailable = biometricManager
+                        .canAuthenticate(Authenticators.BIOMETRIC_STRONG) == BiometricManager.BIOMETRIC_SUCCESS
+                    val anyBiometricAvailable = biometricManager
+                        .canAuthenticate(Authenticators.BIOMETRIC_WEAK) == BiometricManager.BIOMETRIC_SUCCESS
+                    // Face is considered enrolled only when WEAK biometrics are available
+                    // but fingerprint (STRONG) is NOT — because STRONG satisfies WEAK too,
+                    // so WEAK-only success means a face-class biometric is what's enrolled.
+                    val faceAvailable = anyBiometricAvailable && !fingerprintAvailable
+
+                    when (effect.type) {
+                        BiometricType.FINGERPRINT -> {
+                            if (!fingerprintAvailable) {
+                                val reason = when (biometricManager.canAuthenticate(Authenticators.BIOMETRIC_STRONG)) {
+                                    BiometricManager.BIOMETRIC_ERROR_NO_HARDWARE -> "No fingerprint hardware found on this device"
+                                    BiometricManager.BIOMETRIC_ERROR_HW_UNAVAILABLE -> "Fingerprint hardware is unavailable"
+                                    BiometricManager.BIOMETRIC_ERROR_NONE_ENROLLED -> "No fingerprint enrolled. Please set up in Settings → Security."
+                                    else -> "Fingerprint authentication not available"
+                                }
+                                scope.launch { snackbarHostState.showSnackbar(reason) }
+                                return@collect
+                            }
+                        }
+                        BiometricType.FACE_ID -> {
+                            if (!faceAvailable) {
+                                val reason = if (!anyBiometricAvailable) {
+                                    "No biometrics enrolled on this device"
+                                } else {
+                                    "Face ID is not set up on this device. Please enroll face recognition in Settings → Security."
+                                }
+                                scope.launch { snackbarHostState.showSnackbar(reason) }
+                                return@collect
+                            }
+                        }
+                    }
+
+                    val allowedAuthenticators = when (effect.type) {
+                        BiometricType.FINGERPRINT -> Authenticators.BIOMETRIC_STRONG
+                        BiometricType.FACE_ID -> Authenticators.BIOMETRIC_WEAK
+                    }
+
+                    val promptTitle = when (effect.type) {
+                        BiometricType.FINGERPRINT -> "Fingerprint Login"
+                        BiometricType.FACE_ID -> "Face ID Login"
+                    }
+
+                    val promptInfo = BiometricPrompt.PromptInfo.Builder()
+                        .setTitle(promptTitle)
+                        .setSubtitle("Authenticate to access your account")
+                        .setNegativeButtonText("Cancel")
+                        .setAllowedAuthenticators(allowedAuthenticators)
+                        .build()
+
+                    val executor = ContextCompat.getMainExecutor(context)
+                    BiometricPrompt(
+                        activity,
+                        executor,
+                        object : BiometricPrompt.AuthenticationCallback() {
+                            override fun onAuthenticationSucceeded(result: BiometricPrompt.AuthenticationResult) {
+                                scope.launch {
+                                    NavigationEngine.navigate(
+                                        navController,
+                                        NavigationAction(
+                                            type = NavigationType.REPLACE,
+                                            destination = Routes.MAIN,
+                                        ),
+                                    )
+                                }
+                            }
+                            override fun onAuthenticationError(errorCode: Int, errString: CharSequence) {
+                                if (errorCode != BiometricPrompt.ERROR_NEGATIVE_BUTTON &&
+                                    errorCode != BiometricPrompt.ERROR_USER_CANCELED
+                                ) {
+                                    scope.launch { snackbarHostState.showSnackbar(errString.toString()) }
+                                }
+                            }
+                            override fun onAuthenticationFailed() {
+                                scope.launch { snackbarHostState.showSnackbar("Authentication failed. Try again.") }
+                            }
+                        },
+                    ).authenticate(promptInfo)
                 }
                 is LoginEffect.ShowError -> {
                     scope.launch { snackbarHostState.showSnackbar(effect.message) }
@@ -122,14 +217,20 @@ private fun LoginScreenContent(
     snackbarHostState: SnackbarHostState = remember { SnackbarHostState() },
     modifier: Modifier = Modifier,
 ) {
-    SDUIRenderer(
-        screenModel = state.screenModel,
-        onAction = { actionId -> onIntent(LoginIntent.HandleAction(actionId)) },
-        modifier = modifier.fillMaxSize().background(ArchitectColors.LoginBackground),
-        error = state.error,
-    )
-
-    SnackbarHost(hostState = snackbarHostState)
+    Box(modifier = modifier.fillMaxSize().background(ArchitectColors.LoginBackground)) {
+        SDUIRenderer(
+            screenModel = state.screenModel,
+            onAction = { actionId -> onIntent(LoginIntent.HandleAction(actionId)) },
+            modifier = Modifier.fillMaxSize(),
+            error = state.error,
+        )
+        SnackbarHost(
+            hostState = snackbarHostState,
+            modifier = Modifier
+                .align(Alignment.BottomCenter)
+                .navigationBarsPadding(),
+        )
+    }
 }
 
 @Composable

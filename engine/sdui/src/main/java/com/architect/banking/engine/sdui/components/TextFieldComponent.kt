@@ -35,7 +35,7 @@ data class TextFieldComponentProps(
 @Composable
 fun TextFieldComponent(fieldId: String, props: JsonObject, onAction: (String) -> Unit) {
     val decoded = runCatching {
-        Json.decodeFromJsonElement<TextFieldComponentProps>(props)
+        Json { ignoreUnknownKeys = true }.decodeFromJsonElement<TextFieldComponentProps>(props)
     }.getOrDefault(TextFieldComponentProps())
 
     var value by rememberSaveable { mutableStateOf("") }
