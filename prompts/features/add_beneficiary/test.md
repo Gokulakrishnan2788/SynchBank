@@ -1,0 +1,52 @@
+# Add Beneficiary — Tests
+# cat with: CONTEXT.md + contract/testing.md + this file
+
+## Generate these files ONLY
+- AddBeneficiaryViewModelTest.kt
+- AddBeneficiaryUseCaseTest.kt
+- GetBankInstitutionsUseCaseTest.kt
+- AddBeneficiaryScreenJsonParserTest.kt
+
+## AddBeneficiaryViewModelTest — Cover these cases
+1. given_loadScreen_whenInit_thenBankInstitutionsLoadedAndScreenModelSet
+2. given_apiSuccess_whenLoad_thenBankListInState
+3. given_apiFailure_whenLoad_thenErrorState
+4. given_accountNameChanged_whenIntent_thenStateUpdatedAndErrorCleared
+5. given_bankSelected_whenIntent_thenSelectedBankUpdatedAndErrorCleared
+6. given_accountNumberChanged_whenIntent_thenStateUpdatedAndErrorCleared
+7. given_nicknameChanged_whenIntent_thenNicknameUpdated
+8. given_validInputs_whenSubmit_thenIsSubmittingThenShowSuccessEffect
+9. given_blankAccountName_whenSubmit_thenAccountNameErrorInState
+10. given_blankBankName_whenSubmit_thenBankNameErrorInState
+11. given_invalidAccountNumber_whenSubmit_thenAccountNumberErrorInState
+12. given_apiFailure_whenSubmit_thenShowErrorEffect
+13. given_navigateBackIntent_whenDispatched_thenNavigateBackEffect
+14. given_handleActionNavigateBack_whenDispatched_thenNavigateBackEffect
+15. given_clearError_whenIntent_thenAllErrorsNull
+
+## AddBeneficiaryUseCaseTest — Cover these cases
+1. given_validAllParams_whenInvoke_thenRepositoryCalledAndSuccess
+2. given_blankAccountName_whenInvoke_thenValidationError
+3. given_blankBankName_whenInvoke_thenValidationError
+4. given_blankAccountNumber_whenInvoke_thenValidationError
+5. given_nonNumericAccountNumber_whenInvoke_thenValidationError
+6. given_accountNumberTooShort_whenInvoke_thenValidationError (< 8 digits)
+7. given_accountNumberTooLong_whenInvoke_thenValidationError  (> 12 digits)
+8. given_nicknameTooLong_whenInvoke_thenValidationError       (> 50 chars)
+9. given_repositoryFailure_whenInvoke_thenErrorPropagated
+10. given_validParamsNullNickname_whenInvoke_thenSuccess      (nickname is optional)
+
+## GetBankInstitutionsUseCaseTest — Cover these cases
+1. given_repositorySuccess_whenInvoke_thenInstitutionListReturned
+2. given_repositoryFailure_whenInvoke_thenErrorPropagated
+3. given_emptyList_whenInvoke_thenEmptyListHandled
+
+## AddBeneficiaryScreenJsonParserTest — Cover these cases
+1. given_addBeneficiaryScreenJson_whenParsed_thenCorrectScreenId
+2. given_addBeneficiaryScreenJson_whenParsed_thenArchHeaderWithBackTrue
+3. given_addBeneficiaryScreenJson_whenParsed_thenFormHasFourFields
+4. given_addBeneficiaryScreenJson_whenParsed_thenBankFieldIsDropdown
+5. given_addBeneficiaryScreenJson_whenParsed_thenVerificationCardPresent
+6. given_addBeneficiaryScreenJson_whenParsed_thenSubmitActionWired
+7. given_addBeneficiaryScreenJson_whenParsed_thenNavigateBackActionWired
+8. given_malformedJson_whenParsed_thenExceptionHandled

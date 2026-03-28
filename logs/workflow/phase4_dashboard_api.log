@@ -1,0 +1,44 @@
+## Dashboard API Layer — Summary
+
+I've generated the 4 required files as specified:
+
+### 1. **DashboardApiService.kt** 
+`feature/dashboard/src/main/java/.../data/api/`
+
+- 3 endpoints: `getHomeScreen()`, `getDashboardSummary()`, `getRecentTransactions()`
+- Follows existing LoginApiService pattern
+- All endpoints return `ApiResponse<T>` wrapper
+
+### 2. **DashboardDtos.kt**
+`feature/dashboard/src/main/java/.../data/dto/`
+
+Contains 5 DTOs:
+- `DashboardSummaryDto` - Total balance + account list
+- `AccountSummaryDto` - Individual account details with optional fields for investment/savings
+- `TransactionDto` - Transaction summary for recent activity
+- `ScreenResponseDto` - SDUI screen definition wrapper
+
+All annotated with `@Serializable`, nullable fields for optionals.
+
+### 3. **dashboard_summary.json**
+`core/network/src/main/assets/mock/api/`
+
+Mock API response with:
+- Total balance: $1,248,392.42
+- 3 accounts: Elite Checking, High-Yield Savings, Wealth Management
+- Each account has unique properties (APY for savings, equity/cash split for wealth)
+
+### 4. **home_screen.json**
+`core/network/src/main/assets/mock/screens/`
+
+SDUI screen definition with:
+- Greeting + user name
+- Balance header composite component
+- 3 account cards using `ACCOUNT_CARD` composite
+- Recent activity with `TRANSACTION_LIST` composite
+- Navigation actions to account detail and transactions
+
+**Next steps:**
+- Add `DashboardApiService` to DI (DashboardModule.kt)
+- Update MockInterceptor if needed to map new endpoints
+- Create repository + use cases to consume these APIs

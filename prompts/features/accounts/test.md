@@ -1,0 +1,28 @@
+# Accounts — Tests
+# cat with: CONTEXT.md + contract/testing.md + features/accounts/feature.md + this file
+
+## Generate these files ONLY
+- AccountsViewModelTest.kt
+- GetAccountsUseCaseTest.kt
+- AccountsScreenJsonParserTest.kt
+
+## AccountsViewModelTest
+1. given_loadScreen_whenInit_thenAccountsLoaded
+2. given_apiSuccess_whenLoad_thenAllThreeAccountsInState
+3. given_apiFailure_whenLoad_thenErrorState
+4. given_manageAcc001Action_whenHandleAction_thenShowToastEffect
+5. given_viewStatementAction_whenHandleAction_thenShowToastEffect
+6. given_errorState_whenClearError_thenErrorNull
+7. given_refreshIntent_whenDispatched_thenDataRefreshed
+
+## GetAccountsUseCaseTest
+1. given_repositorySuccess_whenInvoke_thenAccountsReturned
+2. given_repositoryFailure_whenInvoke_thenErrorPropagated
+3. given_emptyAccounts_whenInvoke_thenEmptyListHandled
+
+## AccountsScreenJsonParserTest
+1. given_accountsScreenJson_whenParsed_thenCorrectScreenId
+2. given_accountsScreenJson_whenParsed_thenBalanceHeroPresent
+3. given_accountsScreenJson_whenParsed_thenThreeAccountCardsPresent
+4. given_accountsScreenJson_whenParsed_thenDarkCardHasEquityFields
+5. given_malformedJson_whenParsed_thenExceptionHandled

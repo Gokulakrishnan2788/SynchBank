@@ -1,0 +1,46 @@
+# Payments (Transfer + Add Beneficiary) — Tests
+# cat with: CONTEXT.md + contract/testing.md + this file
+
+## Generate these files ONLY
+- TransferViewModelTest.kt
+- AddBeneficiaryViewModelTest.kt
+- SubmitTransferUseCaseTest.kt
+- AddBeneficiaryUseCaseTest.kt
+- TransferScreenJsonParserTest.kt
+
+## TransferViewModelTest
+1. given_loadScreen_whenInit_thenSourceAccountsAndBeneficiariesLoaded
+2. given_firstAccountAutoSelected_whenLoad_thenSelectedAccountInState
+3. given_quickAmountTapped_whenIntent_thenAmountAccumulated
+4. given_amountChanged_whenIntent_thenDisplayFormatted
+5. given_beneficiarySelected_whenIntent_thenSelectedBeneficiaryUpdated
+6. given_validTransfer_whenConfirmProceed_thenSubmittingThenSuccessEffect
+7. given_zeroAmount_whenConfirmProceed_thenValidationError
+8. given_exceedsDailyLimit_whenConfirmProceed_thenLimitError
+9. given_addBeneficiaryIntent_whenDispatched_thenNavigateToAddBeneficiaryEffect
+10. given_viewAllAction_whenHandleAction_thenShowToastEffect
+11. given_apiFailure_whenConfirm_thenErrorState
+12. given_resetForm_whenIntent_thenAmountAndNoteCleared
+
+## AddBeneficiaryViewModelTest
+1. given_loadScreen_whenInit_thenScreenModelLoaded
+2. given_validInputs_whenSubmit_thenSuccessEffect
+3. given_blankAccountName_whenSubmit_thenValidationError
+4. given_blankBankName_whenSubmit_thenValidationError
+5. given_invalidAccountNumber_whenSubmit_thenValidationError
+6. given_apiFailure_whenSubmit_thenErrorEffect
+
+## SubmitTransferUseCaseTest
+1. given_validParams_whenInvoke_thenSuccess
+2. given_zeroAmount_whenInvoke_thenValidationError
+3. given_amountExceedsLimit_whenInvoke_thenLimitError
+4. given_blankSourceAccount_whenInvoke_thenValidationError
+5. given_blankBeneficiary_whenInvoke_thenValidationError
+6. given_repositoryFailure_whenInvoke_thenErrorPropagated
+
+## AddBeneficiaryUseCaseTest
+1. given_validParams_whenInvoke_thenSuccess
+2. given_blankAccountName_whenInvoke_thenValidationError
+3. given_nonNumericAccountNumber_whenInvoke_thenValidationError
+4. given_shortAccountNumber_whenInvoke_thenValidationError
+5. given_repositoryFailure_whenInvoke_thenErrorPropagated

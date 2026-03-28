@@ -3,7 +3,10 @@
     "allow": [
       "Bash(./gradlew :feature:login:testDebugUnitTest)",
       "Bash(find /Users/gokulakrishnanmani/AndroidStudioProjects/SynchBank -path */assets/* -name *.json -type f)",
-      "Bash(git checkout:*)"
+      "Bash(git checkout:*)",
+      "Bash(xargs ls:*)",
+      "Bash(chmod +x run_workflow.sh)",
+      "Bash(./run_workflow.sh --only phase3)"
     ]
   }
 }

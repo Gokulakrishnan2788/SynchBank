@@ -1,0 +1,13 @@
+I've loaded the Architect Banking App context. I understand this is a production-grade Android banking app with:
+
+- **SDUI architecture** (all screens from JSON)
+- **MVI pattern** with strict unidirectional flow
+- **Multi-module structure** (10 modules)
+- **Composite components** specification loaded
+
+I can see you have:
+- Modified files: login_screen.json, LinkTextComponent.kt, WORKFLOW.md
+- Untracked directories: feature prompts, logs, assets
+- A workflow checkpoint log
+
+What would you like me to help with?

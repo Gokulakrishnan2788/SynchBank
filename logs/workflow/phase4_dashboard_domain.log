@@ -1,0 +1,35 @@
+I've generated all the Dashboard domain layer files according to your specifications. Here's what was created:
+
+## Core Domain (`:core:domain`) — 3 files
+
+1. **AccountSummary.kt** - Pure Kotlin domain model for account summary
+2. **DashboardSummary.kt** - Pure Kotlin domain model for dashboard summary
+3. **DashboardRepository.kt** - Repository interface with three methods:
+   - `getDashboardSummary()`
+   - `getRecentTransactions()`
+   - `getHomeScreen()`
+
+## Feature Dashboard (`:feature:dashboard`) — 8 files
+
+### Data Layer (`/data`)
+4. **DashboardRepositoryImpl.kt** - Repository implementation using `safeApiCall` and mapper functions
+5. **DashboardMapper.kt** - Extension functions to map DTOs → domain models
+6. **DashboardApiService.kt** - Retrofit API service interface
+
+### DTOs (`/data/dto`)
+7. **AccountSummaryDto.kt** - Network DTO with `@Serializable`
+8. **DashboardSummaryDto.kt** - Network DTO with `@Serializable`
+9. **TransactionDto.kt** - Network DTO with `@Serializable`
+
+### Domain Layer (`/domain`)
+10. **GetDashboardSummaryUseCase.kt** - UseCase with `NoParams`, delegates to repository
+11. **GetRecentTransactionsUseCase.kt** - UseCase with `NoParams`, delegates to repository
+
+All files follow:
+- ✅ MVI and clean architecture patterns
+- ✅ Pure Kotlin domain models (no Android imports, no @Serializable, no @Entity)
+- ✅ Repository interface in `:core:domain`, implementation in `:feature:dashboard`
+- ✅ Hilt `@Inject` constructors
+- ✅ `@Singleton` on repository implementation
+- ✅ KDoc on all public APIs
+- ✅ Consistent naming and structure matching login feature

@@ -3,8 +3,11 @@ package com.architect.banking.engine.sdui.components
 import androidx.compose.foundation.text.ClickableText
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.runtime.Composable
+import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.SpanStyle
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.ui.text.buildAnnotatedString
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.text.withStyle
 import com.architect.banking.core.ui.theme.ArchitectColors
 import kotlinx.serialization.Serializable
@@ -19,6 +22,8 @@ data class LinkTextComponentProps(
     val linkText: String = "",
     val suffix: String = "",
     val linkColor: String = "NavyPrimary",
+    /** Optional text alignment: "start" (default), "center", or "end". */
+    val alignment: String = "start",
 )
 
 private const val LINK_ANNOTATION_TAG = "LINK_ACTION"
@@ -52,11 +57,24 @@ fun LinkTextComponent(props: JsonObject, onAction: (String) -> Unit) {
         append(decoded.suffix)
     }
 
-    ClickableText(
+    val textAlign = when (decoded.alignment) {
+        "center" -> TextAlign.Center
+        "end" -> TextAlign.End
+        else -> TextAlign.Start
+    }
 
+    val modifier = if (decoded.alignment == "center" || decoded.alignment == "end") {
+        Modifier.fillMaxWidth()
+    } else {
+        Modifier
+    }
+
+    ClickableText(
+        modifier = modifier,
         text = annotatedString,
         style = MaterialTheme.typography.bodyMedium.copy(
             color = ArchitectColors.MediumGray,
+            textAlign = textAlign,
         ),
         onClick = { offset ->
             annotatedString

@@ -242,8 +242,8 @@
         "prefix": "New to the firm?  ",
         "linkText": "Inquire about an account",
         "suffix": "",
-        "linkColor": "NavyPrimary"
-
+        "linkColor": "NavyPrimary",
+        "alignment": "center"
       },
       "action": "INQUIRE"
     }

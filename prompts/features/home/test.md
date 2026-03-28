@@ -1,0 +1,37 @@
+# Home (Dashboard) — Tests
+# cat with: CONTEXT.md + contract/testing.md + this file
+
+## Generate these files ONLY
+- DashboardViewModelTest.kt
+- GetDashboardUseCaseTest.kt
+- GetChartDataUseCaseTest.kt
+- HomeScreenJsonParserTest.kt
+
+## DashboardViewModelTest
+1. given_loadScreen_whenInit_thenDashboardDataLoaded
+2. given_apiSuccess_whenLoad_thenNetWorthAndAccountsInState
+3. given_apiFailure_whenLoad_thenErrorState
+4. given_toggleNetWorth_whenIntent_thenVisibilityFlipped
+5. given_transferAction_whenHandleAction_thenNavigateToPaymentsEffect
+6. given_payBillsAction_whenHandleAction_thenShowToastEffect
+7. given_manageAccountsAction_whenHandleAction_thenNavigateToAccountsEffect
+8. given_changePeriod_whenIntent_thenChartDataReloaded
+9. given_errorState_whenClearError_thenErrorNull
+10. given_refreshIntent_whenDispatched_thenDataRefreshed
+
+## GetDashboardUseCaseTest
+1. given_repositorySuccess_whenInvoke_thenDashboardDataReturned
+2. given_repositoryFailure_whenInvoke_thenErrorPropagated
+3. given_emptyAccounts_whenInvoke_thenEmptyListHandled
+
+## GetChartDataUseCaseTest
+1. given_validPeriod_whenInvoke_thenChartDataReturned
+2. given_blankPeriod_whenInvoke_thenValidationError
+3. given_repositoryFailure_whenInvoke_thenErrorPropagated
+
+## HomeScreenJsonParserTest
+1. given_homeScreenJson_whenParsed_thenCorrectScreenId
+2. given_homeScreenJson_whenParsed_thenNetWorthHeaderPresent
+3. given_homeScreenJson_whenParsed_thenActionButtonRowPresent
+4. given_homeScreenJson_whenParsed_thenActivityRowsPresent
+5. given_malformedJson_whenParsed_thenExceptionHandled
