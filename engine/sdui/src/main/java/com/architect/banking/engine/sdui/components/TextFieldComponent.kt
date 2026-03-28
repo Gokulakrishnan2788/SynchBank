@@ -5,6 +5,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.text.input.ImeAction
 import com.architect.banking.core.ui.components.ArchInputType
 import com.architect.banking.core.ui.components.ArchTextField
 import com.architect.banking.core.ui.components.ArchTextFieldVariant
@@ -40,6 +41,7 @@ fun TextFieldComponent(fieldId: String, props: JsonObject, onAction: (String) ->
 
     var value by rememberSaveable { mutableStateOf("") }
 
+    val archInputType = decoded.inputType.toArchInputType()
     ArchTextField(
         label = decoded.label,
         value = value,
@@ -48,8 +50,9 @@ fun TextFieldComponent(fieldId: String, props: JsonObject, onAction: (String) ->
             onAction("FIELD_CHANGE:$fieldId:$it")
         },
         hint = decoded.hint,
-        inputType = decoded.inputType.toArchInputType(),
+        inputType = archInputType,
         variant = decoded.variant.toArchTextFieldVariant(),
+        imeAction = if (archInputType == ArchInputType.PASSWORD) ImeAction.Done else ImeAction.Next,
     )
 }
 

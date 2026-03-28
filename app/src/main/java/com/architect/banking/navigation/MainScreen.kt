@@ -37,6 +37,7 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.architect.banking.core.ui.theme.ArchitectColors
+import com.architect.banking.feature.accounts.AccountsScreen
 import com.architect.banking.feature.dashboard.DashboardScreen
 import com.architect.banking.feature.payments.AddBeneficiaryScreen
 import com.architect.banking.feature.payments.TransferScreen
@@ -156,7 +157,7 @@ fun MainScreen(rootNavController: NavController) {
                 }
             }
             composable(TAB_ACCOUNTS) {
-                AccountsPlaceholder()
+                AccountsScreen()
             }
             composable(TAB_PROFILE) {
                 ProfileScreen(navController = rootNavController)
@@ -165,10 +166,4 @@ fun MainScreen(rootNavController: NavController) {
     }
 }
 
-@Composable
-private fun AccountsPlaceholder() {
-    Box(modifier = Modifier.fillMaxSize(), contentAlignment = Alignment.Center) {
-        Text(text = "Accounts", color = ArchitectColors.MediumGray)
-    }
-}
 

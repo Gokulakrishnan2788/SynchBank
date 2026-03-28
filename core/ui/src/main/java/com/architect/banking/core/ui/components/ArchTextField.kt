@@ -122,7 +122,7 @@ fun ArchTextField(
                     disabledContainerColor = ArchitectColors.WarmSurface,
                     errorContainerColor = ArchitectColors.WarmSurface,
                     focusedIndicatorColor = ArchitectColors.NavyPrimary,
-                    unfocusedIndicatorColor = ArchitectColors.MediumGray,
+                    unfocusedIndicatorColor = ArchitectColors.NavySecondary,
                     disabledIndicatorColor = Color.Transparent,
                     errorIndicatorColor = ArchitectColors.Error,
                     focusedTextColor = ArchitectColors.NavyPrimary,

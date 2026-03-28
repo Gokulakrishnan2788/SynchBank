@@ -14,7 +14,13 @@
       "Bash(python3 -m json.tool /Users/gokulakrishnanmani/AndroidStudioProjects/SynchBank/core/network/src/main/assets/mock/screens/dashboard_screen.json)",
       "Bash(./gradlew :app:compileDebugKotlin --no-daemon)",
       "Bash(git push:*)",
-      "Bash(find /Users/gokulakrishnanmani/AndroidStudioProjects/SynchBank -path */feature/payments/* -type f)"
+      "Bash(find /Users/gokulakrishnanmani/AndroidStudioProjects/SynchBank -path */feature/payments/* -type f)",
+      "Bash(./gradlew :engine:sdui:compileDebugKotlin)",
+      "Bash(./gradlew :feature:profile:compileDebugKotlin)",
+      "Bash(./gradlew :app:compileDebugKotlin)",
+      "Bash(./gradlew :engine:sdui:compileDebugKotlin :feature:profile:compileDebugKotlin :app:compileDebugKotlin)",
+      "Bash(./gradlew :engine:sdui:compileDebugKotlin :feature:profile:compileDebugKotlin :core:ui:compileDebugKotlin :app:compileDebugKotlin)",
+      "Bash(./gradlew :feature:dashboard:compileDebugKotlin)"
     ]
   }
 }

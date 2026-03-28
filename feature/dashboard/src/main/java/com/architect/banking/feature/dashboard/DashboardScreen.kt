@@ -39,7 +39,7 @@ fun DashboardScreen(
         viewModel.effect.collect { effect ->
             when (effect) {
                 is DashboardEffect.Navigate -> when (effect.action.destination) {
-                    "transfer" -> onSwitchTab("tab_accounts")
+                    "transfer" -> onSwitchTab("tab_payments")
                     "search" -> Toast.makeText(context, "Search coming soon", Toast.LENGTH_SHORT).show()
                     "notifications" -> Toast.makeText(context, "Notifications coming soon", Toast.LENGTH_SHORT).show()
                     else -> Toast.makeText(context, "Not Implemented Yet", Toast.LENGTH_SHORT).show()
