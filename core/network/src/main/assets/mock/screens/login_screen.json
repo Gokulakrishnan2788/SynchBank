@@ -20,7 +20,8 @@
     "props": {
       "title": "SynchBank",
       "iconBackground": "NavyPrimary",
-      "icon": "bank"
+      "icon": "bank",
+      "applyStatusBarPadding": true
     }
   },
 
@@ -242,8 +243,8 @@
         "prefix": "New to the firm?  ",
         "linkText": "Inquire about an account",
         "suffix": "",
-        "linkColor": "NavyPrimary"
-
+        "linkColor": "NavyPrimary",
+        "alignment": "center"
       },
       "action": "INQUIRE"
     }

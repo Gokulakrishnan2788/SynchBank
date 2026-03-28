@@ -1,0 +1,7 @@
+{
+  "success": true,
+  "data": {
+    "period": "Last 6 Months",
+    "dataPoints": [85000, 92000, 88000, 105000, 118000, 142850]
+  }
+}

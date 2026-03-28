@@ -1,0 +1,69 @@
+{
+  "success": true,
+  "data": {
+    "netWorth": 142850.42,
+    "netWorthChange": "+2.4%",
+    "netWorthChangePositive": true,
+    "accounts": [
+      {
+        "id": "acc_001",
+        "type": "ELITE CHECKING",
+        "balance": "$42,301.15",
+        "detail": "Available • ••• 9012",
+        "iconAsset": "ic_account_checking"
+      },
+      {
+        "id": "acc_002",
+        "type": "HIGH-YIELD SAVINGS",
+        "balance": "$100,549.27",
+        "detail": "4.50% APY • ••• 4481",
+        "iconAsset": "ic_account_savings"
+      }
+    ],
+    "activity": [
+      {
+        "id": "act_001",
+        "title": "Apple Store",
+        "subtitle": "Electronics • Today",
+        "amount": "-$1,299.00",
+        "amountPositive": false,
+        "iconAsset": "ic_txn_shopping",
+        "iconBgColor": "IconBgGrey"
+      },
+      {
+        "id": "act_002",
+        "title": "Salary Deposit",
+        "subtitle": "Income • Oct 15",
+        "amount": "+$8,450.00",
+        "amountPositive": true,
+        "iconAsset": "ic_txn_income",
+        "iconBgColor": "IconBgGreen"
+      },
+      {
+        "id": "act_003",
+        "title": "The Oak Bistro",
+        "subtitle": "Dining • Oct 14",
+        "amount": "-$84.20",
+        "amountPositive": false,
+        "iconAsset": "ic_txn_dining",
+        "iconBgColor": "IconBgGrey"
+      },
+      {
+        "id": "act_004",
+        "title": "Tesla Supercharger",
+        "subtitle": "Transport • Oct 12",
+        "amount": "-$22.50",
+        "amountPositive": false,
+        "iconAsset": "ic_txn_transport",
+        "iconBgColor": "IconBgGrey"
+      }
+    ],
+    "exclusiveOffer": {
+      "badgeLabel": "EXCLUSIVE OFFER",
+      "title": "Unlock Private Wealth Advisory Services",
+      "ctaLabel": "Learn more →",
+      "bgColor": "NavyPrimary",
+      "illustrationAsset": "ic_offer_illustration"
+    }
+  }
+}

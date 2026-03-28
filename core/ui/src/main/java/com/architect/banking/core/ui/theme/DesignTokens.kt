@@ -13,17 +13,20 @@ import androidx.compose.ui.unit.sp
  */
 object ArchitectColors {
     // Primary palette
-    val NavyPrimary = Color(0xFF191C1E)
+    val NavyPrimary = Color(0xFF051743)
     val NavySecondary = Color(0xFF1B2E42)
     val NavyTertiary = Color(0xFF2C4A6E)
 
     // Accent
     val GoldAccent = Color(0xFFC9A84C)
     val GoldLight = Color(0xFFE8C97A)
+    val TealAccent = Color(0xFF00897B)
+    val TealLight = Color(0xFFB2DFDB)
+    val TealDark = Color(0xFF004D40)
 
     // Neutrals
     val White = Color(0xFFFFFFFF)
-    val OffWhite = Color(0xFFF5F5F0)
+    val OffWhite = Color(0xFFEDEBE6)
     val LightGray = Color(0xFFE0E0E0)
     val MediumGray = Color(0xFF9E9E9E)
     val DarkGray = Color(0xFF424242)
@@ -41,6 +44,8 @@ object ArchitectColors {
     val OverlayDark = Color(0x80000000)
     val LoginBackground = Color(0xFFEEF2F7)
     val FilledFieldBackground = Color(0xFFFFFFFF)
+    val WarmSurface = Color(0xFFE7E8EA)
+    val FormCardBg = Color(0xFFF0F2F4)
 }
 
 /**

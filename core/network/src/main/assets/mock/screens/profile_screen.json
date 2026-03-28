@@ -5,62 +5,154 @@
     "title": "Profile",
     "analyticsTag": "profile_screen"
   },
-  "layout": {
-    "type": "COLUMN",
-    "padding": { "horizontal": 24, "vertical": 32 }
+  "header": {
+    "id": "header_bar",
+    "type": "HEADER_BAR",
+    "visible": true,
+    "props": {
+      "title": "Architect",
+      "showBack": false,
+      "showSearch": false,
+      "showNotification": true,
+      "notificationAction": "HEADER_NOTIFICATION"
+    }
   },
+  "layout": { "type": "SCROLL", "padding": { "horizontal": 20, "vertical": 16 } },
   "components": [
     {
-      "id": "profile_title",
+      "id": "profile_avatar",
+      "type": "PROFILE_AVATAR_HEADER",
+      "visible": true,
+      "props": {
+        "name": "Alexander Sterling",
+        "memberSince": "MEMBER SINCE JANUARY 2022",
+        "avatarSize": 100
+      }
+    },
+    { "id": "spacer_1", "type": "SPACER", "visible": true, "props": { "height": 28 } },
+    {
+      "id": "personal_info_label",
       "type": "TEXT",
       "visible": true,
-      "props": { "text": "My Profile", "style": "HEADING", "color": "NavyPrimary" }
+      "props": { "text": "PERSONAL INFORMATION", "style": "LABEL", "color": "MediumGray" }
     },
+    { "id": "spacer_2", "type": "SPACER", "visible": true, "props": { "height": 10 } },
     {
-      "id": "spacer_1",
-      "type": "SPACER",
+      "id": "personal_info_card",
+      "type": "PROFILE_INFO_CARD",
       "visible": true,
-      "props": { "height": 24 }
+      "props": {
+        "rows": [
+          { "label": "PRIMARY EMAIL", "value": "a.sterling@architect.com" },
+          { "label": "PHONE NUMBER", "value": "+1 (555) 892-4410" }
+        ]
+      }
     },
+    { "id": "spacer_3", "type": "SPACER", "visible": true, "props": { "height": 28 } },
     {
-      "id": "name_label",
+      "id": "security_label",
       "type": "TEXT",
       "visible": true,
-      "props": { "text": "FULL NAME", "style": "LABEL", "color": "MediumGray" }
+      "props": { "text": "SECURITY & ACCESS", "style": "LABEL", "color": "MediumGray" }
     },
+    { "id": "spacer_4", "type": "SPACER", "visible": true, "props": { "height": 10 } },
     {
-      "id": "name_value",
+      "id": "security_card",
+      "type": "PROFILE_SETTINGS_CARD",
+      "visible": true,
+      "props": {
+        "rows": [
+          {
+            "id": "change_password",
+            "icon": "lock",
+            "title": "Change Password",
+            "rightType": "CHEVRON",
+            "actionId": "CHANGE_PASSWORD"
+          },
+          {
+            "id": "biometric_login",
+            "icon": "fingerprint",
+            "title": "Biometric Login",
+            "subtitle": "Use FaceID or TouchID",
+            "rightType": "TOGGLE",
+            "defaultToggleOn": true,
+            "actionId": "TOGGLE_BIOMETRIC"
+          }
+        ]
+      }
+    },
+    { "id": "spacer_5", "type": "SPACER", "visible": true, "props": { "height": 28 } },
+    {
+      "id": "preferences_label",
       "type": "TEXT",
       "visible": true,
-      "props": { "text": "John Architect", "style": "BODY", "color": "NavyPrimary" }
+      "props": { "text": "APP PREFERENCES", "style": "LABEL", "color": "MediumGray" }
     },
+    { "id": "spacer_6", "type": "SPACER", "visible": true, "props": { "height": 10 } },
     {
-      "id": "divider_1",
-      "type": "DIVIDER",
+      "id": "preferences_card",
+      "type": "PROFILE_SETTINGS_CARD",
       "visible": true,
-      "props": { "thickness": 1, "color": "LightGray" }
+      "props": {
+        "rows": [
+          {
+            "id": "notifications",
+            "icon": "notifications",
+            "title": "Push Notifications",
+            "rightType": "CHEVRON",
+            "actionId": "PUSH_NOTIFICATIONS"
+          },
+          {
+            "id": "appearance",
+            "icon": "appearance",
+            "title": "Appearance",
+            "subtitle": "System Default",
+            "rightType": "CHEVRON",
+            "actionId": "APPEARANCE"
+          },
+          {
+            "id": "language",
+            "icon": "language",
+            "title": "Language",
+            "rightType": "VALUE",
+            "rightValue": "English (US)",
+            "actionId": "LANGUAGE"
+          }
+        ]
+      }
     },
-    {
-      "id": "spacer_2",
-      "type": "SPACER",
-      "visible": true,
-      "props": { "height": 16 }
-    },
+    { "id": "spacer_7", "type": "SPACER", "visible": true, "props": { "height": 32 } },
     {
       "id": "logout_btn",
-      "type": "BUTTON",
+      "type": "LOGOUT_BUTTON",
       "visible": true,
-      "props": { "label": "Sign Out", "style": "DESTRUCTIVE" },
+      "props": { "label": "Log Out" },
       "action": "LOGOUT"
-    }
+    },
+    { "id": "spacer_8", "type": "SPACER", "visible": true, "props": { "height": 16 } },
+    {
+      "id": "footer_text",
+      "type": "TEXT",
+      "visible": true,
+      "props": {
+        "text": "ARCHITECT V4.2.0 \u2022 SECURED BY DEEP LEDGER",
+        "style": "LABEL",
+        "color": "MediumGray",
+        "align": "CENTER"
+      }
+    },
+    { "id": "spacer_end", "type": "SPACER", "visible": true, "props": { "height": 80 } }
   ],
   "actions": {
+    "HEADER_NOTIFICATION": { "type": "NAVIGATE", "destination": "notifications" },
     "LOGOUT": {
       "type": "API_CALL",
       "endpoint": "/auth/logout",
       "method": "POST",
       "onSuccess": { "type": "NAVIGATE", "destination": "login" },
       "onError": { "type": "SHOW_DIALOG", "params": { "message": "Could not sign out. Please try again." } }
-    }
+    },
+    "CHANGE_PASSWORD": { "type": "SHOW_DIALOG", "params": { "message": "Change Password coming soon." } },
+    "PUSH_NOTIFICATIONS": { "type": "SHOW_DIALOG", "params": { "message": "Notification settings coming soon." } }
   }
 }

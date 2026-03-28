@@ -14,6 +14,7 @@ enum class SduiActionType {
     DISMISS,
     SUBMIT_FORM,
     BIOMETRIC_AUTH,
+    LOCAL_STATE,
 }
 
 /**

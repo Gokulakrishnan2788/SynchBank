@@ -1,0 +1,36 @@
+# Profile — Tests
+# cat with: CONTEXT.md + contract/testing.md + features/profile/feature.md + this file
+
+## Generate these files ONLY
+- ProfileViewModelTest.kt
+- GetUserProfileUseCaseTest.kt
+- UpdateBiometricSettingUseCaseTest.kt
+- ProfileScreenJsonParserTest.kt
+
+## ProfileViewModelTest
+1. given_loadScreen_whenInit_thenProfileLoaded
+2. given_apiSuccess_whenLoad_thenUserProfileInState
+3. given_apiFailure_whenLoad_thenErrorState
+4. given_biometricToggleTrue_whenIntent_thenBiometricEnabledTrue
+5. given_biometricToggleFalse_whenIntent_thenBiometricEnabledFalse
+6. given_logoutAction_whenHandleAction_thenShowLogoutConfirmDialogEffect
+7. given_logoutIntent_whenDispatched_thenNavigateToLoginEffect
+8. given_changePasswordAction_whenHandleAction_thenShowToastEffect
+9. given_logoutApiFailure_whenLogOut_thenErrorState
+10. given_errorState_whenClearError_thenErrorNull
+
+## GetUserProfileUseCaseTest
+1. given_repositorySuccess_whenInvoke_thenProfileReturned
+2. given_repositoryFailure_whenInvoke_thenErrorPropagated
+
+## UpdateBiometricSettingUseCaseTest
+1. given_enableTrue_whenInvoke_thenRepositoryCalledWithTrue
+2. given_enableFalse_whenInvoke_thenRepositoryCalledWithFalse
+3. given_repositoryFailure_whenInvoke_thenErrorPropagated
+
+## ProfileScreenJsonParserTest
+1. given_profileScreenJson_whenParsed_thenCorrectScreenId
+2. given_profileScreenJson_whenParsed_thenAvatarSectionPresent
+3. given_profileScreenJson_whenParsed_thenAllSettingsRowsPresent
+4. given_profileScreenJson_whenParsed_thenLogoutActionWired
+5. given_malformedJson_whenParsed_thenExceptionHandled

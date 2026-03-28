@@ -49,6 +49,9 @@ dependencies {
     implementation(libs.androidx.compose.material3)
     implementation(libs.androidx.navigation.compose)
 
+    // Biometric
+    implementation(libs.androidx.biometric)
+
     // Retrofit — needed directly for LoginModule to inject Retrofit into LoginApiService
     implementation(libs.retrofit)
 

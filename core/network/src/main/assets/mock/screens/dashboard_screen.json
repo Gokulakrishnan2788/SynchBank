@@ -5,98 +5,475 @@
     "title": "Dashboard",
     "analyticsTag": "dashboard_screen"
   },
+  "header": {
+    "id": "header_bar",
+    "type": "HEADER_BAR",
+    "visible": true,
+    "props": {
+      "title": "Architect",
+      "iconBackground": "NavyPrimary",
+      "showSearch": true,
+      "showNotification": true,
+      "searchAction": "HEADER_SEARCH",
+      "notificationAction": "HEADER_NOTIFICATION"
+    }
+  },
   "layout": {
     "type": "LAZY_COLUMN",
-    "padding": { "horizontal": 16, "vertical": 16 }
+    "padding": { "horizontal": 16, "vertical": 20 }
   },
   "components": [
     {
-      "id": "greeting",
+      "id": "net_worth_label",
       "type": "TEXT",
       "visible": true,
-      "props": { "text": "Good morning,", "style": "BODY", "color": "MediumGray" }
+      "props": { "text": "TOTAL NET WORTH", "style": "LABEL", "color": "MediumGray" }
     },
     {
-      "id": "user_name",
-      "type": "TEXT",
-      "visible": true,
-      "props": { "text": "Welcome back.", "style": "HEADING", "color": "NavyPrimary" }
-    },
-    {
-      "id": "spacer_1",
+      "id": "spacer_nw_1",
       "type": "SPACER",
       "visible": true,
-      "props": { "height": 24 }
+      "props": { "height": 4 }
     },
     {
-      "id": "balance_card",
-      "type": "CARD",
-      "visible": true,
-      "props": {
-        "elevation": 4,
-        "children": [
-          {
-            "id": "balance_label",
-            "type": "TEXT",
-            "visible": true,
-            "props": { "text": "TOTAL PORTFOLIO VALUE", "style": "LABEL", "color": "MediumGray" }
-          },
-          {
-            "id": "balance_amount",
-            "type": "TEXT",
-            "visible": true,
-            "props": { "text": "$485,650.75", "style": "DISPLAY", "color": "NavyPrimary" }
-          }
-        ]
-      }
-    },
-    {
-      "id": "spacer_2",
-      "type": "SPACER",
-      "visible": true,
-      "props": { "height": 24 }
-    },
-    {
-      "id": "quick_actions_label",
+      "id": "net_worth_amount",
       "type": "TEXT",
       "visible": true,
-      "props": { "text": "Quick Actions", "style": "HEADING", "color": "NavyPrimary" }
+      "props": { "text": "$142,850.42", "style": "DISPLAY", "color": "NavyPrimary" }
     },
     {
-      "id": "spacer_3",
+      "id": "spacer_nw_2",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 4 }
+    },
+    {
+      "id": "net_worth_change",
+      "type": "TEXT",
+      "visible": true,
+      "props": { "text": "+2.4% vs last month", "style": "CAPTION", "color": "Success" }
+    },
+    {
+      "id": "spacer_actions",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 20 }
+    },
+    {
+      "id": "actions_row",
+      "type": "ROW",
+      "visible": true,
+      "props": { "horizontalArrangement": "START", "spacing": 12, "verticalAlignment": "CENTER", "fillChildrenEqually": true },
+      "children": [
+        {
+          "id": "transfer_btn",
+          "type": "BUTTON",
+          "visible": true,
+          "props": { "label": "Transfer", "style": "PRIMARY" },
+          "action": "GO_TRANSFER"
+        },
+        {
+          "id": "pay_bills_btn",
+          "type": "BUTTON",
+          "visible": true,
+          "props": { "label": "Pay Bills", "style": "PRIMARY", "containerColor": "NavyTertiary" },
+          "action": "GO_PAY_BILLS"
+        }
+      ]
+    },
+    {
+      "id": "spacer_section_1",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 32 }
+    },
+    {
+      "id": "relationships_header",
+      "type": "ROW",
+      "visible": true,
+      "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
+      "children": [
+        {
+          "id": "relationships_title",
+          "type": "TEXT",
+          "visible": true,
+          "props": { "text": "Relationships", "style": "HEADING", "color": "NavyPrimary" }
+        },
+        {
+          "id": "manage_accounts_link",
+          "type": "LINK_TEXT",
+          "visible": true,
+          "props": { "linkText": "Manage Accounts", "linkColor": "Info" },
+          "action": "GO_MANAGE_ACCOUNTS"
+        }
+      ]
+    },
+    {
+      "id": "spacer_accounts",
       "type": "SPACER",
       "visible": true,
       "props": { "height": 12 }
     },
     {
-      "id": "accounts_btn",
-      "type": "BUTTON",
+      "id": "elite_checking_card",
+      "type": "CARD",
       "visible": true,
-      "props": { "label": "View Accounts", "style": "SECONDARY" },
-      "action": "GO_ACCOUNTS"
+      "props": {
+        "elevation": 2,
+        "children": [
+          {
+            "id": "elite_top_row",
+            "type": "ROW",
+            "visible": true,
+            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "TOP" },
+            "children": [
+              {
+                "id": "elite_label",
+                "type": "TEXT",
+                "visible": true,
+                "props": { "text": "ELITE CHECKING", "style": "LABEL", "color": "MediumGray" }
+              },
+              {
+                "id": "elite_icon",
+                "type": "ICON",
+                "visible": true,
+                "props": { "name": "wallet", "size": 40, "tint": "LightGray" }
+              }
+            ]
+          },
+          {
+            "id": "spacer_elite_1",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 6 }
+          },
+          {
+            "id": "elite_balance",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "$42,301.15", "style": "HEADING", "color": "NavyPrimary" }
+          },
+          {
+            "id": "spacer_elite_2",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 2 }
+          },
+          {
+            "id": "elite_sub",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "Available  \u2022  \u2022\u2022\u2022 9012", "style": "CAPTION", "color": "MediumGray" }
+          }
+        ]
+      }
     },
     {
-      "id": "spacer_4",
+      "id": "spacer_savings",
       "type": "SPACER",
       "visible": true,
-      "props": { "height": 8 }
+      "props": { "height": 12 }
     },
     {
-      "id": "transfer_btn",
-      "type": "BUTTON",
+      "id": "hys_card",
+      "type": "CARD",
       "visible": true,
-      "props": { "label": "Transfer Funds", "style": "PRIMARY" },
-      "action": "GO_TRANSFER"
+      "props": {
+        "elevation": 2,
+        "children": [
+          {
+            "id": "hys_top_row",
+            "type": "ROW",
+            "visible": true,
+            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "TOP" },
+            "children": [
+              {
+                "id": "hys_label",
+                "type": "TEXT",
+                "visible": true,
+                "props": { "text": "HIGH-YIELD SAVINGS", "style": "LABEL", "color": "MediumGray" }
+              },
+              {
+                "id": "hys_icon",
+                "type": "ICON",
+                "visible": true,
+                "props": { "name": "savings", "size": 40, "tint": "LightGray" }
+              }
+            ]
+          },
+          {
+            "id": "spacer_hys_1",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 6 }
+          },
+          {
+            "id": "hys_balance",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "$100,549.27", "style": "HEADING", "color": "NavyPrimary" }
+          },
+          {
+            "id": "spacer_hys_2",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 2 }
+          },
+          {
+            "id": "hys_sub",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "4.50% APY  \u2022  \u2022\u2022\u2022 4481", "style": "CAPTION", "color": "MediumGray" }
+          }
+        ]
+      }
+    },
+    {
+      "id": "spacer_portfolio",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 12 }
+    },
+    {
+      "id": "portfolio_card",
+      "type": "CARD",
+      "visible": true,
+      "props": {
+        "elevation": 2,
+        "children": [
+          {
+            "id": "portfolio_header_row",
+            "type": "ROW",
+            "visible": true,
+            "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
+            "children": [
+              {
+                "id": "portfolio_title",
+                "type": "TEXT",
+                "visible": true,
+                "props": { "text": "Portfolio Growth", "style": "HEADING", "color": "NavyPrimary" }
+              },
+              {
+                "id": "portfolio_period",
+                "type": "TEXT",
+                "visible": true,
+                "props": { "text": "Last 6 Months", "style": "CAPTION", "color": "MediumGray" }
+              }
+            ]
+          },
+          {
+            "id": "spacer_portfolio_1",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 4 }
+          },
+          {
+            "id": "portfolio_subtitle",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "Insights from your last 6 months", "style": "CAPTION", "color": "MediumGray" }
+          },
+          {
+            "id": "spacer_portfolio_chart",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 16 }
+          },
+          {
+            "id": "portfolio_line_chart",
+            "type": "LINE_CHART",
+            "visible": true,
+            "props": {
+              "dataPoints": [85000, 92000, 88000, 105000, 118000, 142850],
+              "lineColor": "TealAccent",
+              "height": 120
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "spacer_activity_section",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 32 }
+    },
+    {
+      "id": "activity_header",
+      "type": "ROW",
+      "visible": true,
+      "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
+      "children": [
+        {
+          "id": "activity_title",
+          "type": "TEXT",
+          "visible": true,
+          "props": { "text": "Activity", "style": "HEADING", "color": "NavyPrimary" }
+        },
+        {
+          "id": "view_all_link",
+          "type": "LINK_TEXT",
+          "visible": true,
+          "props": { "linkText": "View All", "linkColor": "NavyPrimary" },
+          "action": "GO_VIEW_ALL"
+        }
+      ]
+    },
+    {
+      "id": "spacer_activity",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 12 }
+    },
+    {
+      "id": "activity_card",
+      "type": "CARD",
+      "visible": true,
+      "props": {
+        "elevation": 2,
+        "children": [
+          {
+            "id": "activity_apple",
+            "type": "ACTIVITY_ITEM",
+            "visible": true,
+            "props": {
+              "iconName": "shopping_bag",
+              "iconBackground": "lightgray",
+              "iconTint": "gray",
+              "title": "Apple Store",
+              "subtitle": "Electronics  \u2022  Today",
+              "amount": "-$1,299.00",
+              "amountColor": "NavyPrimary"
+            }
+          },
+          {
+            "id": "activity_salary",
+            "type": "ACTIVITY_ITEM",
+            "visible": true,
+            "props": {
+              "iconName": "payments",
+              "iconBackground": "success",
+              "iconTint": "white",
+              "title": "Salary Deposit",
+              "subtitle": "Income  \u2022  Oct 15",
+              "amount": "+$8,450.00",
+              "amountColor": "success"
+            }
+          },
+          {
+            "id": "activity_oak",
+            "type": "ACTIVITY_ITEM",
+            "visible": true,
+            "props": {
+              "iconName": "restaurant",
+              "iconBackground": "orange",
+              "iconTint": "orange",
+              "title": "The Oak Bistro",
+              "subtitle": "Dining  \u2022  Oct 14",
+              "amount": "-$84.20",
+              "amountColor": "NavyPrimary"
+            }
+          },
+          {
+            "id": "activity_tesla",
+            "type": "ACTIVITY_ITEM",
+            "visible": true,
+            "props": {
+              "iconName": "car",
+              "iconBackground": "blue",
+              "iconTint": "blue",
+              "title": "Tesla Supercharger",
+              "subtitle": "Transport  \u2022  Oct 12",
+              "amount": "-$22.50",
+              "amountColor": "NavyPrimary"
+            }
+          }
+        ]
+      }
+    },
+    {
+      "id": "spacer_offer",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 20 }
+    },
+    {
+      "id": "exclusive_offer_card",
+      "type": "CARD",
+      "visible": true,
+      "props": {
+        "elevation": 4,
+        "containerColor": "NavyPrimary",
+        "children": [
+          {
+            "id": "offer_tag",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "EXCLUSIVE OFFER", "style": "LABEL", "color": "GoldAccent" }
+          },
+          {
+            "id": "spacer_offer_1",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 8 }
+          },
+          {
+            "id": "offer_title",
+            "type": "TEXT",
+            "visible": true,
+            "props": { "text": "Unlock Private Wealth Advisory Services", "style": "HEADING", "color": "White" }
+          },
+          {
+            "id": "spacer_offer_2",
+            "type": "SPACER",
+            "visible": true,
+            "props": { "height": 12 }
+          },
+          {
+            "id": "offer_link",
+            "type": "LINK_TEXT",
+            "visible": true,
+            "props": { "linkText": "Learn more \u2192", "linkColor": "White" },
+            "action": "GO_EXCLUSIVE_OFFER"
+          }
+        ]
+      }
+    },
+    {
+      "id": "spacer_bottom",
+      "type": "SPACER",
+      "visible": true,
+      "props": { "height": 24 }
     }
   ],
   "actions": {
-    "GO_ACCOUNTS": {
+    "HEADER_SEARCH": {
       "type": "NAVIGATE",
-      "destination": "accounts"
+      "destination": "search"
+    },
+    "HEADER_NOTIFICATION": {
+      "type": "NAVIGATE",
+      "destination": "notifications"
     },
     "GO_TRANSFER": {
       "type": "NAVIGATE",
       "destination": "transfer"
+    },
+    "GO_PAY_BILLS": {
+      "type": "NAVIGATE",
+      "destination": "pay_bills"
+    },
+    "GO_MANAGE_ACCOUNTS": {
+      "type": "NAVIGATE",
+      "destination": "accounts"
+    },
+    "GO_VIEW_ALL": {
+      "type": "NAVIGATE",
+      "destination": "activity"
+    },
+    "GO_EXCLUSIVE_OFFER": {
+      "type": "NAVIGATE",
+      "destination": "wealth_advisory"
     }
   }
 }

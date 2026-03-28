@@ -35,6 +35,7 @@ enum class ArchButtonStyle {
  * @param onClick Action triggered on tap.
  * @param modifier Optional layout modifier.
  * @param style Visual style of the button. Defaults to [ArchButtonStyle.PRIMARY].
+ * @param containerColor Overrides the button background color when provided.
  * @param loading When true, replaces label with a spinner and disables interaction.
  * @param enabled Whether the button is interactive.
  */
@@ -44,6 +45,7 @@ fun ArchButton(
     onClick: () -> Unit,
     modifier: Modifier = Modifier,
     style: ArchButtonStyle = ArchButtonStyle.PRIMARY,
+    containerColor: Color? = null,
     loading: Boolean = false,
     enabled: Boolean = true,
 ) {
@@ -52,7 +54,7 @@ fun ArchButton(
         .height(52.dp)
 
     when (style) {
-        ArchButtonStyle.PRIMARY -> PrimaryButton(label, onClick, buttonModifier, loading, enabled)
+        ArchButtonStyle.PRIMARY -> PrimaryButton(label, onClick, buttonModifier, containerColor, loading, enabled)
         ArchButtonStyle.SECONDARY -> SecondaryButton(label, onClick, buttonModifier, loading, enabled)
         ArchButtonStyle.GHOST -> GhostButton(label, onClick, buttonModifier, enabled)
         ArchButtonStyle.DESTRUCTIVE -> DestructiveButton(label, onClick, buttonModifier, loading, enabled)
@@ -64,6 +66,7 @@ private fun PrimaryButton(
     label: String,
     onClick: () -> Unit,
     modifier: Modifier,
+    containerColor: Color?,
     loading: Boolean,
     enabled: Boolean,
 ) {
@@ -73,7 +76,7 @@ private fun PrimaryButton(
         enabled = enabled && !loading,
         shape = RoundedCornerShape(12.dp),
         colors = ButtonDefaults.buttonColors(
-            containerColor = ArchitectColors.NavyPrimary,
+            containerColor = containerColor ?: ArchitectColors.NavyPrimary,
             contentColor = ArchitectColors.White,
         ),
     ) {

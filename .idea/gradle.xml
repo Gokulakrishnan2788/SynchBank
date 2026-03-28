@@ -20,8 +20,10 @@
             <option value="$PROJECT_DIR$/engine/navigation" />
             <option value="$PROJECT_DIR$/engine/sdui" />
             <option value="$PROJECT_DIR$/feature" />
+            <option value="$PROJECT_DIR$/feature/accounts" />
             <option value="$PROJECT_DIR$/feature/dashboard" />
             <option value="$PROJECT_DIR$/feature/login" />
+            <option value="$PROJECT_DIR$/feature/payments" />
             <option value="$PROJECT_DIR$/feature/profile" />
           </set>
         </option>

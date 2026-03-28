@@ -1,26 +1,28 @@
 package com.architect.banking.engine.sdui.components
 
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBarsPadding
-import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.foundation.layout.width
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.AccountBalance
-import androidx.compose.material.icons.filled.AccountCircle
-import androidx.compose.material.icons.filled.Home
-import androidx.compose.material.icons.filled.Star
+import androidx.compose.material.icons.automirrored.outlined.ArrowBack
+import androidx.compose.material.icons.outlined.AccountCircle
+import androidx.compose.material.icons.outlined.Notifications
+import androidx.compose.material.icons.outlined.Search
 import androidx.compose.material3.Icon
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import coil.compose.AsyncImage
@@ -37,78 +39,123 @@ data class HeaderBarComponentProps(
     val title: String = "",
     val iconBackground: String = "NavyPrimary",
     val icon: String? = null,
+    val applyStatusBarPadding: Boolean = false,
+    val showSearch: Boolean = false,
+    val showNotification: Boolean = false,
+    val searchAction: String = "HEADER_SEARCH",
+    val notificationAction: String = "HEADER_NOTIFICATION",
+    val showBack: Boolean = false,
+    val backAction: String = "NAVIGATE_BACK",
 )
-
-private fun resolveLocalIcon(name: String): ImageVector = when (name.lowercase()) {
-    "home" -> Icons.Default.Home
-    "bank", "account_balance" -> Icons.Default.AccountBalance
-    "profile", "account_circle" -> Icons.Default.AccountCircle
-    else -> Icons.Default.Star
-}
 
 private fun String.isUrl() = startsWith("http://") || startsWith("https://")
 
-private fun resolveIconBackground(token: String) = when (token) {
-    "NavySecondary" -> ArchitectColors.NavySecondary
-    "NavyTertiary" -> ArchitectColors.NavyTertiary
-    "GoldAccent" -> ArchitectColors.GoldAccent
-    else -> ArchitectColors.NavyPrimary
-}
-
 /**
- * Renders a HEADER_BAR SDUI component as a full-width white row with a branded icon and title.
+ * Renders a HEADER_BAR SDUI component.
  *
- * The [HeaderBarComponentProps.icon] field accepts either:
- * - A URL string → loaded via Coil [AsyncImage]
- * - An icon name (e.g. "bank", "home") → resolved to a local [ImageVector]
+ * Layout: [avatar] [title]  ···  [search icon] [notification icon]
  *
- * @param props Raw JSON props decoded into [HeaderBarComponentProps].
- * @param onAction Unused; present for registry interface consistency.
+ * The left icon renders as a circular avatar — either loaded via Coil (URL)
+ * or shown as the [Icons.Outlined.AccountCircle] placeholder.
  */
 @Composable
 fun HeaderBarComponent(props: JsonObject, onAction: (String) -> Unit) {
     val decoded = runCatching {
-        Json.decodeFromJsonElement<HeaderBarComponentProps>(props)
+        Json { ignoreUnknownKeys = true }.decodeFromJsonElement<HeaderBarComponentProps>(props)
     }.getOrDefault(HeaderBarComponentProps())
-
-    val bgColor = resolveIconBackground(decoded.iconBackground)
 
     Row(
         modifier = Modifier
-            .fillMaxWidth().statusBarsPadding()
+            .fillMaxWidth()
+            .then(if (decoded.applyStatusBarPadding) Modifier.statusBarsPadding() else Modifier)
             .background(ArchitectColors.White)
-            .padding(horizontal = 24.dp, vertical = 14.dp),
+            .padding(horizontal = 16.dp, vertical = 12.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(10.dp),
+        horizontalArrangement = Arrangement.SpaceBetween,
     ) {
-        Box(
-            modifier = Modifier
-                .size(32.dp)
-                .background(bgColor, RoundedCornerShape(8.dp)),
-            contentAlignment = Alignment.Center,
-        ) {
-            val icon = decoded.icon
-            if (!icon.isNullOrBlank() && icon.isUrl()) {
-                AsyncImage(
-                    model = icon,
-                    contentDescription = null,
-                    modifier = Modifier.size(20.dp),
-                )
+        // ── Left: back-or-avatar + title ─────────────────────────────────────
+        Row(verticalAlignment = Alignment.CenterVertically) {
+            if (decoded.showBack) {
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .clickable { onAction(decoded.backAction) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.AutoMirrored.Outlined.ArrowBack,
+                        contentDescription = "Back",
+                        tint = ArchitectColors.NavyPrimary,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
             } else {
-                val imageVector = if (!icon.isNullOrBlank()) resolveLocalIcon(icon)
-                else Icons.Default.AccountBalance
-                Icon(
-                    imageVector = imageVector,
-                    contentDescription = null,
-                    tint = ArchitectColors.White,
-                    modifier = Modifier.size(18.dp),
-                )
+                val icon = decoded.icon
+                if (!icon.isNullOrBlank() && icon.isUrl()) {
+                    AsyncImage(
+                        model = icon,
+                        contentDescription = "User avatar",
+                        modifier = Modifier
+                            .size(36.dp)
+                            .clip(CircleShape),
+                    )
+                } else {
+                    Icon(
+                        imageVector = Icons.Outlined.AccountCircle,
+                        contentDescription = "User avatar",
+                        tint = ArchitectColors.NavyPrimary,
+                        modifier = Modifier.size(36.dp),
+                    )
+                }
+            }
+
+            Spacer(modifier = Modifier.width(8.dp))
+
+            Text(
+                text = decoded.title,
+                style = ArchitectTypography.Heading3.copy(fontWeight = FontWeight.Bold),
+                color = ArchitectColors.NavyPrimary,
+            )
+        }
+
+        // ── Right: search + notification ──────────────────────────────────────
+        Row(
+            verticalAlignment = Alignment.CenterVertically,
+            horizontalArrangement = Arrangement.spacedBy(4.dp),
+        ) {
+            if (decoded.showSearch) {
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .clickable { onAction(decoded.searchAction) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Search,
+                        contentDescription = "Search",
+                        tint = ArchitectColors.NavyPrimary,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
+            }
+            if (decoded.showNotification) {
+                Box(
+                    modifier = Modifier
+                        .size(36.dp)
+                        .clip(CircleShape)
+                        .clickable { onAction(decoded.notificationAction) },
+                    contentAlignment = Alignment.Center,
+                ) {
+                    Icon(
+                        imageVector = Icons.Outlined.Notifications,
+                        contentDescription = "Notifications",
+                        tint = ArchitectColors.NavyPrimary,
+                        modifier = Modifier.size(22.dp),
+                    )
+                }
             }
         }
-        Text(
-            text = decoded.title,
-            style = ArchitectTypography.Heading3.copy(fontWeight = FontWeight.Bold),
-            color = ArchitectColors.NavyPrimary,
-        )
     }
 }

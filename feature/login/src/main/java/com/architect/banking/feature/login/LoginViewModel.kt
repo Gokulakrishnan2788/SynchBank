@@ -3,27 +3,22 @@ package com.architect.banking.feature.login
 import android.content.Context
 import androidx.lifecycle.viewModelScope
 import com.architect.banking.core.domain.BaseViewModel
-import com.architect.banking.core.domain.NoParams
 import com.architect.banking.core.domain.Result
 import com.architect.banking.core.domain.onError
 import com.architect.banking.core.domain.onSuccess
 import com.architect.banking.engine.sdui.parser.SDUIParser
-import com.architect.banking.feature.login.domain.GetSessionUseCase
 import com.architect.banking.feature.login.domain.LoginUseCase
 import com.architect.banking.feature.login.domain.LogoutUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import dagger.hilt.android.qualifiers.ApplicationContext
-import kotlinx.coroutines.flow.first
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
 /**
  * MVI ViewModel for the Login screen.
  *
- * On creation:
- * 1. Checks for an existing valid session via [GetSessionUseCase] — auto-navigates to
- *    Dashboard if one is found so the user is never shown the login form unnecessarily.
- * 2. Dispatches [LoginIntent.LoadScreen] to fetch the SDUI screen definition.
+ * On creation dispatches [LoginIntent.LoadScreen] to fetch the SDUI screen definition.
+ * Navigation to Dashboard only happens on explicit login button press + successful validation.
  *
  * The [LogoutUseCase] is injected here so it can be wired to a future "sign out from
  * Dashboard back to Login" flow without modifying the constructor.
@@ -32,7 +27,6 @@ import javax.inject.Inject
 class LoginViewModel @Inject constructor(
     private val loginUseCase: LoginUseCase,
     private val logoutUseCase: LogoutUseCase,
-    private val getSessionUseCase: GetSessionUseCase,
     private val sduiParser: SDUIParser,
     @ApplicationContext private val context: Context,
 ) : BaseViewModel<LoginState, LoginIntent, LoginEffect>() {
@@ -40,7 +34,6 @@ class LoginViewModel @Inject constructor(
     override fun initialState() = LoginState()
 
     init {
-        checkExistingSession()
         handleIntent(LoginIntent.LoadScreen())
     }
 
@@ -52,21 +45,9 @@ class LoginViewModel @Inject constructor(
             is LoginIntent.Submit -> submitLogin()
             is LoginIntent.ForgotPassword -> setEffect(LoginEffect.NavigateToForgotPassword)
             is LoginIntent.BiometricSelected -> setEffect(LoginEffect.ShowBiometricPrompt(intent.type))
+            is LoginIntent.BiometricLoginSuccess -> setEffect(LoginEffect.NavigateToDashboard)
             is LoginIntent.HandleAction -> handleAction(intent.actionId)
             is LoginIntent.ClearError -> setState { copy(error = null) }
-        }
-    }
-
-    /**
-     * Checks for an existing valid session on init.
-     * Takes only the first emission to avoid re-triggering navigation on session changes.
-     */
-    private fun checkExistingSession() {
-        viewModelScope.launch {
-            val result = getSessionUseCase(NoParams).first()
-            if (result is Result.Success && result.data != null) {
-                setEffect(LoginEffect.NavigateToDashboard)
-            }
         }
     }
 
@@ -144,6 +125,8 @@ class LoginViewModel @Inject constructor(
             actionId == "SUBMIT_FORM" -> submitLogin()
             actionId == "FORGOT_PASSWORD" -> setEffect(LoginEffect.NavigateToForgotPassword)
             actionId == "INQUIRE" -> setEffect(LoginEffect.NavigateToInquire)
+            actionId == "BIOMETRIC_FINGERPRINT" -> setEffect(LoginEffect.ShowBiometricPrompt(BiometricType.FINGERPRINT))
+            actionId == "BIOMETRIC_FACE_ID" -> setEffect(LoginEffect.ShowBiometricPrompt(BiometricType.FACE_ID))
         }
     }
 }

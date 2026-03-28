@@ -1,5 +1,6 @@
 package com.architect.banking.feature.dashboard
 
+import android.widget.Toast
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -10,10 +11,10 @@ import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.saveable.rememberSaveable
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
-import com.architect.banking.engine.navigation.NavigationEngine
 import com.architect.banking.engine.sdui.renderer.SDUIRenderer
 
 /**
@@ -27,16 +28,22 @@ import com.architect.banking.engine.sdui.renderer.SDUIRenderer
 @Composable
 fun DashboardScreen(
     navController: NavController,
+    onSwitchTab: (String) -> Unit = {},
     viewModel: DashboardViewModel = hiltViewModel(),
 ) {
     val state by viewModel.state.collectAsStateWithLifecycle()
+    val context = LocalContext.current
     var dialogMessage by rememberSaveable { mutableStateOf<String?>(null) }
 
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
-                is DashboardEffect.Navigate ->
-                    NavigationEngine.navigate(navController, effect.action)
+                is DashboardEffect.Navigate -> when (effect.action.destination) {
+                    "transfer" -> onSwitchTab("tab_payments")
+                    "search" -> Toast.makeText(context, "Search coming soon", Toast.LENGTH_SHORT).show()
+                    "notifications" -> Toast.makeText(context, "Notifications coming soon", Toast.LENGTH_SHORT).show()
+                    else -> Toast.makeText(context, "Not Implemented Yet", Toast.LENGTH_SHORT).show()
+                }
                 is DashboardEffect.ShowDialog ->
                     dialogMessage = effect.message
             }
