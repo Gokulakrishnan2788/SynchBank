@@ -100,7 +100,7 @@ cat prompts/CONTEXT.md prompts/contract/testing.md \
 ./gradlew :feature:dashboard:testDebugUnitTest
 
 # Step 5 — Validate
-cat prompts/CONTEXT.md prompts/features/validate.md \
+cat prompts/CONTEXT.md prompts/features/home/validate.md \
     prompts/features/home/validate.md | claude
 
 git add . && git commit -m "feat: home dashboard tab — SDUI + MVI + tests ✅"

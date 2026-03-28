@@ -58,15 +58,13 @@ fun LoginScreen(
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
             when (effect) {
-                LoginEffect.NavigateToDashboard -> {
-//                    NavigationEngine.navigate(
-//                        navController,
-//                        NavigationAction(
-//                            type = NavigationType.REPLACE,
-//                            destination = Routes.DASHBOARD,
-//                        ),
-//                    )
-                }
+                LoginEffect.NavigateToDashboard -> NavigationEngine.navigate(
+                    navController,
+                    NavigationAction(
+                        type = NavigationType.REPLACE,
+                        destination = Routes.MAIN,
+                    ),
+                )
                 LoginEffect.NavigateToForgotPassword -> NavigationEngine.navigate(
                     navController,
                     NavigationAction(destination = Routes.FORGOT_PASSWORD),

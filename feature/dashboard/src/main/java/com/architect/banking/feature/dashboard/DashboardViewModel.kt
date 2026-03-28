@@ -1,15 +1,15 @@
 package com.architect.banking.feature.dashboard
 
+import android.content.Context
 import com.architect.banking.core.domain.BaseViewModel
 import com.architect.banking.core.domain.Result
-import com.architect.banking.core.network.model.safeApiCall
 import com.architect.banking.engine.navigation.NavigationAction
 import com.architect.banking.engine.navigation.NavigationType
-import com.architect.banking.engine.navigation.Routes
-import com.architect.banking.engine.sdui.api.ScreenApiService
 import com.architect.banking.engine.sdui.model.ActionModel
 import com.architect.banking.engine.sdui.model.SduiActionType
+import com.architect.banking.engine.sdui.parser.SDUIParser
 import dagger.hilt.android.lifecycle.HiltViewModel
+import dagger.hilt.android.qualifiers.ApplicationContext
 import javax.inject.Inject
 
 /**
@@ -20,7 +20,8 @@ import javax.inject.Inject
  */
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    private val screenApiService: ScreenApiService,
+    private val sduiParser: SDUIParser,
+    @ApplicationContext private val context: Context,
 ) : BaseViewModel<DashboardState, DashboardIntent, DashboardEffect>() {
 
     override fun initialState() = DashboardState()
@@ -36,18 +37,22 @@ class DashboardViewModel @Inject constructor(
         }
     }
 
-//    private suspend fun loadScreen() {
-//        setState { copy(isLoading = true, error = null) }
-//        when (val result = safeApiCall { screenApiService.getScreen(Routes.DASHBOARD) }) {
-//            is Result.Success -> setState { copy(isLoading = false, screenModel = result.data) }
-//            is Result.Error -> setState { copy(isLoading = false, error = result.message) }
-//            is Result.Loading -> Unit
-//        }
-//    }
-private suspend fun loadScreen() {
-    setState { copy(isLoading = true, error = null) }
-    setState { copy(isLoading = false) }
-}
+    private suspend fun loadScreen() {
+        setState { copy(isLoading = true, error = null) }
+        try {
+            val json = context.assets
+                .open("mock/screens/dashboard_screen.json")
+                .bufferedReader()
+                .use { it.readText() }
+            when (val result = sduiParser.parse(json)) {
+                is Result.Success -> setState { copy(isLoading = false, screenModel = result.data) }
+                is Result.Error -> setState { copy(isLoading = false, error = result.message) }
+                is Result.Loading -> Unit
+            }
+        } catch (e: Exception) {
+            setState { copy(isLoading = false, error = "Failed to load screen: ${e.message}") }
+        }
+    }
 
     private suspend fun onHandleAction(actionId: String) {
         val action = state.value.screenModel?.actions?.get(actionId) ?: return

@@ -6,7 +6,13 @@
       "Bash(git checkout:*)",
       "Bash(xargs ls:*)",
       "Bash(chmod +x run_workflow.sh)",
-      "Bash(./run_workflow.sh --only phase3)"
+      "Bash(./run_workflow.sh --only phase3)",
+      "Bash(./run_workflow.sh --only phase4 2>&1)",
+      "Bash(./run_workflow.sh --resume 2>&1)",
+      "Bash(git add:*)",
+      "Bash(git commit:*)",
+      "Bash(python3 -m json.tool /Users/gokulakrishnanmani/AndroidStudioProjects/SynchBank/core/network/src/main/assets/mock/screens/dashboard_screen.json)",
+      "Bash(./gradlew :app:compileDebugKotlin --no-daemon)"
     ]
   }
 }

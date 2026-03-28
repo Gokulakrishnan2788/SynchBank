@@ -214,7 +214,7 @@ run_gradle() {
       local orig; orig=$(cat "$fix_file")
       echo -e "\n\n## Error\n\`\`\`\n$(tail -80 "$log_file")\n\`\`\`" >> "$fix_file"
       cat "$PROMPTS/CONTEXT.md" "$fix_file" \
-        | claude --model "$CLAUDE_MODEL" --no-interactive --dangerously-skip-permissions 2>&1 \
+        | claude --model "$CLAUDE_MODEL" --print --dangerously-skip-permissions 2>&1 \
         | tee "$LOG_DIR/autofix_${key}.log" || true
       echo "$orig" > "$fix_file"
     fi

@@ -3,10 +3,9 @@ package com.architect.banking.navigation
 import androidx.compose.runtime.Composable
 import androidx.navigation.NavHostController
 import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
 import com.architect.banking.engine.navigation.Routes
-import com.architect.banking.feature.dashboard.dashboardGraph
 import com.architect.banking.feature.login.loginGraph
-import com.architect.banking.feature.profile.profileGraph
 
 /**
  * Root [NavHost] that wires all feature navigation graphs.
@@ -25,7 +24,8 @@ fun ArchitectNavHost(navController: NavHostController) {
         startDestination = Routes.LOGIN,
     ) {
         loginGraph(navController)
-        dashboardGraph(navController)
-        profileGraph(navController)
+        composable(route = Routes.MAIN) {
+            MainScreen(rootNavController = navController)
+        }
     }
 }

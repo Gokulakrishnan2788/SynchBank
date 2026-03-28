@@ -9,6 +9,7 @@ package com.architect.banking.engine.navigation
  */
 object Routes {
     const val LOGIN = "login"
+    const val MAIN = "main"
     const val DASHBOARD = "dashboard"
     const val PROFILE = "profile"
     const val ACCOUNTS = "accounts"
