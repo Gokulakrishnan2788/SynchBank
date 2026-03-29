@@ -3,6 +3,7 @@ package com.architect.banking.feature.login
 import android.content.ActivityNotFoundException
 import android.content.Intent
 import android.net.Uri
+import android.provider.Settings
 import androidx.biometric.BiometricManager
 import androidx.biometric.BiometricManager.Authenticators
 import androidx.biometric.BiometricPrompt
@@ -16,6 +17,7 @@ import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.DisposableEffect
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -30,6 +32,9 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.FragmentActivity
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.Lifecycle
+import androidx.lifecycle.LifecycleEventObserver
+import androidx.lifecycle.compose.LocalLifecycleOwner
 import androidx.lifecycle.compose.collectAsStateWithLifecycle
 import androidx.navigation.NavController
 import androidx.navigation.compose.rememberNavController
@@ -67,6 +72,86 @@ fun LoginScreen(
     val snackbarHostState = remember { SnackbarHostState() }
     val scope = rememberCoroutineScope()
     var errorDialogMessage by rememberSaveable { mutableStateOf<String?>(null) }
+
+    // ── Security checks ────────────────────────────────────────────────────────
+    var usbDebuggingEnabled by remember { mutableStateOf(false) }
+    var detectedScreenRecorders by remember { mutableStateOf<List<String>>(emptyList()) }
+
+    fun runSecurityChecks() {
+        usbDebuggingEnabled = SecurityChecker.isUsbDebuggingEnabled(context)
+        detectedScreenRecorders = SecurityChecker.getInstalledScreenRecorders(context)
+    }
+
+    LaunchedEffect(Unit) { runSecurityChecks() }
+
+    val lifecycleOwner = LocalLifecycleOwner.current
+    DisposableEffect(lifecycleOwner) {
+        val observer = LifecycleEventObserver { _, event ->
+            if (event == Lifecycle.Event.ON_RESUME) runSecurityChecks()
+        }
+        lifecycleOwner.lifecycle.addObserver(observer)
+        onDispose { lifecycleOwner.lifecycle.removeObserver(observer) }
+    }
+
+    // USB debugging — persistent blocking dialog (cannot be dismissed without action)
+    if (usbDebuggingEnabled) {
+        AlertDialog(
+            onDismissRequest = { /* intentionally blocked — user must disable ADB */ },
+            title = { Text("Security Warning") },
+            text = {
+                Text(
+                    "USB Debugging (ADB) is currently enabled. For your account security, " +
+                        "SynchBank requires you to disable USB Debugging before signing in.\n\n" +
+                        "Go to Settings → Developer Options → Disable USB Debugging.",
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        try {
+                            context.startActivity(
+                                Intent(Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                            )
+                        } catch (_: ActivityNotFoundException) {
+                            context.startActivity(
+                                Intent(Settings.ACTION_SETTINGS)
+                                    .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                            )
+                        }
+                    },
+                ) { Text("Open Developer Options") }
+            },
+            dismissButton = null,
+        )
+    }
+
+    // Screen recorder — persistent blocking dialog
+    if (detectedScreenRecorders.isNotEmpty() && !usbDebuggingEnabled) {
+        val appList = detectedScreenRecorders.joinToString("\n• ", prefix = "• ")
+        AlertDialog(
+            onDismissRequest = { /* intentionally blocked — user must remove recorder */ },
+            title = { Text("Screen Recording Detected") },
+            text = {
+                Text(
+                    "The following screen recording app(s) are installed on your device:\n\n$appList\n\n" +
+                        "To protect your banking information, please uninstall these apps before " +
+                        "continuing. Tap below to open the app settings and uninstall.",
+                )
+            },
+            confirmButton = {
+                TextButton(
+                    onClick = {
+                        context.startActivity(
+                            Intent(Settings.ACTION_MANAGE_APPLICATIONS_SETTINGS)
+                                .addFlags(Intent.FLAG_ACTIVITY_NEW_TASK),
+                        )
+                    },
+                ) { Text("Open App Settings") }
+            },
+            dismissButton = null,
+        )
+    }
 
     LaunchedEffect(Unit) {
         viewModel.effect.collect { effect ->
