@@ -9,6 +9,31 @@
     <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" android:maxSdkVersion="32" />
 
+    <!-- Visibility declarations for screen-recorder detection (API 30+) -->
+    <queries>
+        <package android:name="com.mobizen.mirroring" />
+        <package android:name="com.kimcy929.screenrecorder" />
+        <package android:name="com.hecorat.screenrecorder.free" />
+        <package android:name="com.hecorat.screenrecorder" />
+        <package android:name="com.duapps.recorder" />
+        <package android:name="com.ilos.screenrecorder" />
+        <package android:name="com.fennifith.adb.lolrecorder" />
+        <package android:name="teamviewer.host" />
+        <package android:name="com.teamviewer.teamviewer" />
+        <package android:name="com.anydesk.anydeskandroid" />
+        <package android:name="net.anydesk" />
+        <package android:name="com.samsung.android.app.screenrecorder" />
+        <package android:name="com.miui.screenrecorder" />
+        <package android:name="com.huawei.screenrecorder" />
+        <package android:name="com.oneplus.screenrecorder" />
+        <package android:name="com.xrecorder.video" />
+        <package android:name="com.vidma.screen" />
+        <package android:name="com.nll.screenrecorderpro" />
+        <package android:name="jp.ne.necsoft.app.screenrecorder" />
+        <package android:name="com.callrecorder.screen.recorder" />
+        <package android:name="com.google.android.apps.screenrecording" />
+    </queries>
+
     <application
         android:name=".SynchBankApplication"
         android:allowBackup="true"
@@ -29,16 +54,24 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
+        <!-- Splash screen — launcher entry point -->
         <activity
-            android:name=".MainActivity"
+            android:name=".SplashActivity"
             android:exported="true"
             android:label="@string/app_name"
-            android:theme="@style/Theme.SynchBank">
+            android:theme="@style/Theme.SynchBank.Splash">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
 
+        <!-- Main activity — started by SplashActivity -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false"
+            android:label="@string/app_name"
+            android:theme="@style/Theme.SynchBank">
             <!-- Deep link support -->
             <intent-filter android:autoVerify="true">
                 <action android:name="android.intent.action.VIEW" />

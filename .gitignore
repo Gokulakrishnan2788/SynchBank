@@ -14,19 +14,67 @@
 .cxx
 local.properties
 
-# Project exclude paths
-/core/data/build/
-/core/data/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
-/core/domain/build/
-/core/network/build/
-/core/network/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
-/core/ui/build/
-/engine/navigation/build/
-/engine/sdui/build/
-/engine/sdui/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
-/feature/dashboard/build/
-/feature/dashboard/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
-/feature/login/build/
-/feature/login/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
-/feature/profile/build/
-/feature/profile/build/intermediates/javac/debug/compileDebugJavaWithJavac/classes/
+# =========================
+# Gradle & Build
+# =========================
+.gradle/
+build/
+**/build/
+
+# =========================
+# Local configuration
+# =========================
+local.properties
+
+# =========================
+# Android Studio / IntelliJ
+# =========================
+.idea/
+*.iml
+
+# Optional: keep shared code style if needed
+# !.idea/codeStyles/
+# !.idea/inspectionProfiles/
+
+# =========================
+# OS files
+# =========================
+.DS_Store
+Thumbs.db
+
+# =========================
+# Kotlin / Java compiled
+# =========================
+*.class
+*.dex
+
+# =========================
+# APK / AAB / outputs
+# =========================
+*.apk
+*.ap_
+*.aab
+
+# =========================
+# Native build
+# =========================
+.externalNativeBuild/
+.cxx/
+
+# =========================
+# Logs
+# =========================
+*.log
+
+# =========================
+# Keystore (VERY IMPORTANT)
+# =========================
+*.jks
+*.keystore
+
+# =========================
+# Firebase / Google services (optional)
+# =========================
+# Uncomment if you don't want to commit these
+# google-services.json
+# serviceAccountKey.json

@@ -1,0 +1,11 @@
+{
+  "success": true,
+  "data": {
+    "columnCount": 2,
+    "beneficiaries": [
+      { "id": "ben_001", "name": "Alex Sterling", "subtitle": "STUDIO ALPHA", "avatarAsset": "avatar_alex", "isSelected": false },
+      { "id": "ben_002", "name": "Mila Novak", "subtitle": "NOVAK & CO.", "avatarAsset": "avatar_mila", "isSelected": true },
+      { "id": "ben_003", "name": "Julian Drax", "subtitle": "PERSONAL", "avatarAsset": "avatar_julian", "isSelected": false }
+    ]
+  }
+}

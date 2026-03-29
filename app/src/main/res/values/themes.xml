@@ -2,4 +2,13 @@
 <resources>
 
     <style name="Theme.SynchBank" parent="android:Theme.Material.Light.NoActionBar" />
+
+    <!-- Splash screen — deep navy window background prevents white flash on cold start -->
+    <style name="Theme.SynchBank.Splash" parent="Theme.SynchBank">
+        <item name="android:windowBackground">@color/splash_background</item>
+        <item name="android:statusBarColor">@android:color/transparent</item>
+        <item name="android:navigationBarColor">@android:color/transparent</item>
+        <item name="android:windowLightStatusBar">false</item>
+    </style>
+
 </resources>

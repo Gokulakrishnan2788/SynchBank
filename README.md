@@ -822,3 +822,58 @@ Android Engineer · Jetpack Compose · Clean Architecture · SDUI Systems
 ---
 
 *SynchBank is a demonstration project showcasing modern Android engineering practices. All data is mocked and no real financial transactions are processed.*
+
+---
+
+## 13. App Screens
+
+> All screenshots captured from a production build running on a physical device.
+
+<table>
+  <tr>
+    <td align="center"><img src="Screenshots/splash_screen.png" width="200"/><br/><sub><b>Splash Screen</b></sub></td>
+    <td align="center"><img src="Screenshots/User_Login.jpg" width="200"/><br/><sub><b>User Login</b></sub></td>
+    <td align="center"><img src="Screenshots/security_warning.png" width="200"/><br/><sub><b>Security Warning — USB Debugging</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/Screen_Recorder_Warning.jpg" width="200"/><br/><sub><b>Screen Recorder Warning</b></sub></td>
+    <td align="center"><img src="Screenshots/Dash_Borad.jpg" width="200"/><br/><sub><b>Dashboard</b></sub></td>
+    <td align="center"><img src="Screenshots/Accouts_Section.jpg" width="200"/><br/><sub><b>Accounts</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/Transfer.jpg" width="200"/><br/><sub><b>Transfer</b></sub></td>
+    <td align="center"><img src="Screenshots/Benificiary_Selection.jpg" width="200"/><br/><sub><b>Beneficiary Selection</b></sub></td>
+    <td align="center"><img src="Screenshots/Beneficiary_Adding.jpg" width="200"/><br/><sub><b>Adding Beneficiary</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/New_Beneficiary_Added.jpg" width="200"/><br/><sub><b>New Beneficiary Added</b></sub></td>
+    <td align="center"><img src="Screenshots/Account_Selection.jpg" width="200"/><br/><sub><b>Account Selection</b></sub></td>
+    <td align="center"><img src="Screenshots/Bank_Selection.jpg" width="200"/><br/><sub><b>Bank Selection</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/Wealth_Management.jpg" width="200"/><br/><sub><b>Wealth Management</b></sub></td>
+    <td align="center"><img src="Screenshots/Language_Selection.jpg" width="200"/><br/><sub><b>Language Selection</b></sub></td>
+    <td align="center"><img src="Screenshots/User_Profile.jpg" width="200"/><br/><sub><b>User Profile</b></sub></td>
+  </tr>
+  <tr>
+    <td align="center"><img src="Screenshots/Update_User_profile.jpg" width="200"/><br/><sub><b>Update User Profile</b></sub></td>
+    <td align="center"><img src="Screenshots/User_Settings.jpg" width="200"/><br/><sub><b>User Settings</b></sub></td>
+    <td></td>
+  </tr>
+</table>
+
+---
+
+## 14. App Binary
+
+Download the latest release APK and install directly on any Android device (minSdk 24+).
+
+> **Note:** Enable **Install unknown apps** in your device settings before installing.
+
+| | |
+|---|---|
+| **Version** | v1.0 |
+| **Platform** | Android 7.0+ (API 24) |
+| **Size** | ~10 MB |
+
+[⬇ Download SynchBank v1.0 APK](https://github.com/gokulakrishnan2788/SynchBank/releases/download/v1.0/app-release.apk)

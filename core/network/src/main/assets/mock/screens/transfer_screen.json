@@ -1,0 +1,111 @@
+{
+  "screenId": "transfer",
+  "version": "1.0",
+  "metadata": { "title": "Transfer", "analyticsTag": "transfer_screen" },
+  "header": {
+    "id": "header_bar",
+    "type": "HEADER_BAR",
+    "visible": true,
+    "props": {
+      "title": "Architect",
+      "showSearch": false,
+      "showNotification": true,
+      "notificationAction": "HEADER_NOTIFICATION"
+    }
+  },
+  "layout": { "type": "SCROLL", "padding": { "horizontal": 20, "vertical": 16 } },
+  "components": [
+    { "id": "step_label", "type": "TEXT", "visible": true, "props": { "text": "STEP 01", "style": "LABEL", "color": "MediumGray" } },
+    {
+      "id": "title_row", "type": "ROW", "visible": true,
+      "props": { "horizontalArrangement": "SPACE_BETWEEN", "verticalAlignment": "CENTER" },
+      "children": [
+        { "id": "transfer_title", "type": "TEXT", "visible": true, "props": { "text": "Transfer", "style": "DISPLAY", "color": "NavyPrimary" } },
+        { "id": "confirmation_label", "type": "TEXT", "visible": true, "props": { "text": "Confirmation", "style": "BODY", "color": "MediumGray" } }
+      ]
+    },
+    { "id": "spacer_prog", "type": "SPACER", "visible": true, "props": { "height": 6 } },
+    { "id": "progress_bar", "type": "TRANSFER_PROGRESS", "visible": true, "props": { "progress": 0.5, "activeColor": "TealAccent", "inactiveColor": "LightGray", "height": 3 } },
+    { "id": "spacer_1", "type": "SPACER", "visible": true, "props": { "height": 24 } },
+    { "id": "source_label", "type": "TEXT", "visible": true, "props": { "text": "SELECT SOURCE ACCOUNT", "style": "LABEL", "color": "MediumGray" } },
+    { "id": "spacer_2", "type": "SPACER", "visible": true, "props": { "height": 8 } },
+    {
+      "id": "source_selector", "type": "SOURCE_ACCOUNT_SELECTOR", "visible": true,
+      "props": {
+        "accounts": [
+          { "id": "acc_001", "name": "Elite Checking", "maskedNumber": "•••• 8821", "balance": "$42,905.12" },
+          { "id": "acc_003", "name": "Wealth Management", "maskedNumber": "•••• 8829", "balance": "$142,850.00" }
+        ],
+        "defaultSelectedId": "acc_003",
+        "balanceColor": "TealAccent"
+      },
+      "action": "ACCOUNT_SELECTED"
+    },
+    { "id": "spacer_3", "type": "SPACER", "visible": true, "props": { "height": 20 } },
+    { "id": "amount_label", "type": "TEXT", "visible": true, "props": { "text": "TRANSFER AMOUNT", "style": "LABEL", "color": "MediumGray" } },
+    { "id": "spacer_4", "type": "SPACER", "visible": true, "props": { "height": 8 } },
+    {
+      "id": "amount_input", "type": "AMOUNT_INPUT_CARD", "visible": true,
+      "props": {
+        "currencySymbol": "$",
+        "hint": "0.00",
+        "quickAmounts": [
+          { "label": "+$1,000", "value": 1000 },
+          { "label": "+$5,000", "value": 5000 },
+          { "label": "+$10,000", "value": 10000 }
+        ]
+      },
+      "action": "AMOUNT_CHANGED"
+    },
+    { "id": "spacer_5", "type": "SPACER", "visible": true, "props": { "height": 20 } },
+    { "id": "note_label", "type": "TEXT", "visible": true, "props": { "text": "ADD NOTE (OPTIONAL)", "style": "LABEL", "color": "MediumGray" } },
+    { "id": "spacer_6", "type": "SPACER", "visible": true, "props": { "height": 8 } },
+    {
+      "id": "note_field", "type": "TEXT_FIELD", "visible": true,
+      "props": { "label": "", "hint": "e.g. Q3 Studio Renovation...", "inputType": "TEXT", "variant": "FILLED", "minLines": 3 },
+      "action": "NOTE_CHANGED"
+    },
+    { "id": "spacer_7", "type": "SPACER", "visible": true, "props": { "height": 28 } },
+    {
+      "id": "confirm_btn", "type": "BUTTON", "visible": true,
+      "props": { "label": "Confirm & Proceed  \u203a", "style": "PRIMARY" },
+      "action": "CONFIRM_PROCEED"
+    },
+    { "id": "spacer_8", "type": "SPACER", "visible": true, "props": { "height": 28 } },
+    { "id": "beneficiary_label", "type": "TEXT", "visible": true, "props": { "text": "BENEFICIARY", "style": "LABEL", "color": "MediumGray" } },
+    { "id": "spacer_9", "type": "SPACER", "visible": true, "props": { "height": 4 } },
+    {
+      "id": "beneficiary_header", "type": "SECTION_HEADER_ROW", "visible": true,
+      "props": { "title": "Recent", "trailingLabel": "VIEW ALL", "trailingColor": "TealAccent", "trailingAction": "VIEW_ALL" }
+    },
+    { "id": "spacer_10", "type": "SPACER", "visible": true, "props": { "height": 12 } },
+    {
+      "id": "beneficiary_grid", "type": "BENEFICIARY_GRID", "visible": true,
+      "props": {
+        "beneficiaries": [
+          { "id": "ben_001", "name": "Alex Sterling", "subtitle": "STUDIO ALPHA", "isSelected": false },
+          { "id": "ben_002", "name": "Mila Novak", "subtitle": "NOVAK & CO.", "isSelected": true },
+          { "id": "ben_003", "name": "Julian Drax", "subtitle": "PERSONAL", "isSelected": false }
+        ],
+        "showAddNew": true
+      },
+      "action": "BENEFICIARY_SELECTED"
+    },
+    { "id": "spacer_11", "type": "SPACER", "visible": true, "props": { "height": 20 } },
+    {
+      "id": "transfer_limit", "type": "TRANSFER_LIMIT_BANNER", "visible": true,
+      "props": { "label": "Transfer Limit", "amount": "$250,000", "suffix": "DAILY REMAINING", "bgColor": "TealAccent" }
+    },
+    { "id": "spacer_end", "type": "SPACER", "visible": true, "props": { "height": 80 } }
+  ],
+  "actions": {
+    "HEADER_NOTIFICATION": { "type": "NAVIGATE", "destination": "notifications" },
+    "ACCOUNT_SELECTED": { "type": "LOCAL_STATE" },
+    "AMOUNT_CHANGED": { "type": "LOCAL_STATE" },
+    "NOTE_CHANGED": { "type": "LOCAL_STATE" },
+    "CONFIRM_PROCEED": { "type": "NAVIGATE", "destination": "confirm_transfer" },
+    "BENEFICIARY_SELECTED": { "type": "LOCAL_STATE" },
+    "ADD_BENEFICIARY": { "type": "NAVIGATE", "destination": "add_beneficiary" },
+    "VIEW_ALL": { "type": "NAVIGATE", "destination": "view_all_beneficiaries" }
+  }
+}
