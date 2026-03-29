@@ -22,7 +22,8 @@
       "Bash(./gradlew :engine:sdui:compileDebugKotlin :feature:profile:compileDebugKotlin :core:ui:compileDebugKotlin :app:compileDebugKotlin)",
       "Bash(./gradlew :feature:dashboard:compileDebugKotlin)",
       "Bash(./gradlew :app:compileDebugKotlin :feature:login:compileDebugKotlin --no-daemon -q)",
-      "Bash(./gradlew assembleDebug --no-daemon -q)"
+      "Bash(./gradlew assembleDebug --no-daemon -q)",
+      "Bash(./gradlew :engine:sdui:compileDebugKotlin --no-daemon -q)"
     ]
   }
 }
