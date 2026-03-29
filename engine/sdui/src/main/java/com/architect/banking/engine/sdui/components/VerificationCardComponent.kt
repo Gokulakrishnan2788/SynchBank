@@ -35,7 +35,7 @@ data class VerificationCardProps(
 )
 
 @Composable
-fun git(props: JsonObject, onAction: (String) -> Unit) {
+fun VerificationCardComponent(props: JsonObject, onAction: (String) -> Unit) {
     val decoded = runCatching {
         Json { ignoreUnknownKeys = true }.decodeFromJsonElement<VerificationCardProps>(props)
     }.getOrDefault(VerificationCardProps())
