@@ -23,6 +23,8 @@
 10. [Libraries Used](#10-libraries-used)
 11. [App Functionality](#11-app-functionality)
 12. [Project Setup](#12-project-setup)
+13. [App Screens](#13-app-screens)
+14. [App Binary](#14-app-binary)
 
 ---
 
