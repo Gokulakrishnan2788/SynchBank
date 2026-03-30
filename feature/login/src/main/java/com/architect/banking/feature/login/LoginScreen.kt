@@ -163,10 +163,9 @@ fun LoginScreen(
                         destination = Routes.MAIN,
                     ),
                 )
-                LoginEffect.NavigateToForgotPassword -> NavigationEngine.navigate(
-                    navController,
-                    NavigationAction(destination = Routes.FORGOT_PASSWORD),
-                )
+                LoginEffect.NavigateToForgotPassword -> scope.launch {
+                    snackbarHostState.showSnackbar("Forgot Password feature coming soon!")
+                }
                 LoginEffect.NavigateToInquire -> {
                     try {
                         val intent = Intent(Intent.ACTION_VIEW, Uri.parse("https://www.google.com")).apply {
